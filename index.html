@@ -324,7 +324,7 @@ const m1_vie = {
     ex('Curl bíceps con barra EZ',3,'10-12','RIR 2','45 seg'),
     ex('Extensión de tríceps en polea cuerda',3,'12-15','RIR 2','45 seg'),
   ],
-  blockD:{ type:'tabata', label:'Tabata metabólico opcional (4 min)', detail:'20 seg trabajo / 10 seg pausa × 8 rondas — Kettlebell swing o battle ropes' },
+  blockD:{ type:'tabata', label:'Tabata metabólico opcional (4 min)', detail:'20 seg trabajo / 10 seg pausa × 8 rondas — Kettlebell swing o ski erg' },
 };
 
 // Día 3 — Lunes o Martes — Rota entre Lower, Upper, Full Body
@@ -332,102 +332,80 @@ const m1_vie = {
 // Progresión: densidad y complejidad aumentan semana a semana
 // Estructura: calentamiento dinámico → bloque de fuerza base → circuito metabólico
 
-// Semana 1 — Circuito de iniciación (AMRAP 12 min)
+// ── DÍA 3 — 2 CIRCUITOS METABÓLICOS (sin fuerza base suelta) ─────────────────
+
 const m1_d3_s1 = {
-  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — Iniciación (AMRAP 12 min)',
-  blockB:[
-    ex('Goblet squat con kettlebell',3,'12','RIR 3','90 seg'),
-    ex('Remo en máquina',3,'12','RIR 3','90 seg'),
-  ],
+  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — Semana 1',
+  blockB:[],
   blockC:[
-    ex('AMRAP 12 min — Circuito sem 1',1,'Max rondas','—','—',{notes:'Ronda = 10 KB swing + 10 push-up + 10 goblet squat + 200m remo (o 40 seg ski erg). Anotá cuántas rondas completás — es tu marca base.'}),
+    ex('Circuito A — AMRAP 12 min',1,'Max rondas','—','2 min pausa',{notes:'Ronda = 10 KB swing + 8 goblet squat + 8 push-up + 200m remo ergométrico. Anotá cuántas rondas completás — es tu marca base del plan.'}),
+    ex('Circuito B — EMOM 10 min (5 estaciones)',1,'10 minutos','—','—',{notes:'Min 1: 12 wall balls · Min 2: 10 box jump · Min 3: 8 KB swing · Min 4: 30 seg ski erg · Min 5: 8 burpees. Repetís 2 veces. Descansás el tiempo que sobre dentro de cada minuto.'}),
   ],
 };
 
-// Semana 2 — Circuito por tiempo (4 rondas con descanso)
 const m1_d3_s2 = {
-  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — 4 rondas c/descanso',
-  blockB:[
-    ex('Peso muerto con mancuernas',3,'10','RIR 3','90 seg'),
-    ex('Press militar con mancuernas sentada',3,'10','RIR 3','90 seg'),
-  ],
+  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — Semana 2',
+  blockB:[],
   blockC:[
-    ex('4 rondas — Circuito sem 2',1,'4 rondas','—','90 seg entre rondas',{notes:'Por ronda: 12 wall balls + 10 zancada reversa c/mancuernas (5 c/lado) + 10 remo KB c/cada brazo + 30 seg battle ropes. Descansá 90 seg entre rondas.'}),
+    ex('Circuito A — 4 rondas for time',1,'4 rondas','—','90 seg entre rondas',{notes:'Por ronda: 12 wall balls + 10 KB swing + 10 zancada reversa c/KB (5 c/lado) + 30 seg ski erg. Anotá el tiempo total.'}),
+    ex('Circuito B — AMRAP 8 min',1,'Max rondas','—','—',{notes:'Ronda = 8 burpees + 10 slam balls + 40 seg ski erg + 10 box jump. Sin pausas. Anotá tus rondas — vas a repetir este circuito en sem 4 para medir progreso.'}),
   ],
 };
 
-// Semana 3 — Tabata doble (2 bloques Tabata 4 min c/u)
 const m1_d3_s3 = {
-  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — Tabata doble (8 min)',
-  blockB:[
-    ex('Hip thrust c/barra',3,'12','RIR 2','90 seg'),
-    ex('Jalón al pecho agarre amplio',3,'10','RIR 2','90 seg'),
-  ],
+  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — Semana 3',
+  blockB:[],
   blockC:[
-    ex('Tabata A (4 min) — KB swing',1,'8 × 20seg/10seg','—','2 min pausa',{notes:'20 seg KB swing pesado / 10 seg pausa × 8 rondas. Descansá 2 min.'}),
-    ex('Tabata B (4 min) — Box jump + Push-up',1,'8 × 20seg/10seg','—','—',{notes:'Alternás: 20 seg box jump / 10 seg pausa / 20 seg push-up / 10 seg pausa × 4 veces cada uno. Total 4 min.'}),
+    ex('Circuito A — Tabata KB swing (4 min)',1,'8 × 20seg/10seg','—','2 min pausa',{notes:'20 seg KB swing pesado / 10 seg pausa × 8 rondas. Peso que te permita mantener técnica en todas las rondas.'}),
+    ex('Circuito B — Tabata 5 estaciones (10 min)',1,'2 × 5 estaciones','—','—',{notes:'20 seg trabajo / 10 seg pausa rotando: box jump → push-up → slam balls → 30 seg ski erg → burpees. Primera ronda completa, 1 min de pausa, segunda ronda completa. Total 10 min.'}),
   ],
 };
 
-// Semana 4 — EMOM 16 min
 const m1_d3_s4 = {
-  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — EMOM 16 min',
-  blockB:[
-    ex('Sentadilla goblet con pausa 2 seg',3,'10','RIR 2','90 seg'),
-    ex('Remo con mancuerna a un brazo',3,'10 c/lado','RIR 2','75 seg'),
-  ],
+  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — Semana 4',
+  blockB:[],
   blockC:[
-    ex('EMOM 16 min — 4 estaciones',1,'16 minutos','—','—',{notes:'Cada minuto, al inicio, ejecutás el ejercicio de esa estación y descansás el resto del minuto. Min 1: 12 wall balls · Min 2: 10 KB swing · Min 3: 8 burpees · Min 4: 200m remo. Repetís el ciclo 4 veces.'}),
+    ex('Circuito A — EMOM 15 min (5 estaciones)',1,'15 minutos','—','2 min pausa',{notes:'Min 1: 12 wall balls · Min 2: 10 KB swing · Min 3: 8 burpees · Min 4: 200m remo (o 40 seg máx) · Min 5: 10 box jump. Repetís 3 veces. Descansás el sobrante de cada minuto.'}),
+    ex('Circuito B — EMOM 10 min intensivo (5 estaciones)',1,'10 minutos','—','—',{notes:'Min 1: 12 wall balls · Min 2: 10 box jump · Min 3: 10 slam balls · Min 4: 40 seg ski erg · Min 5: 8 burpees. Repetís 2 veces. Más estaciones y más intenso que el EMOM de sem 1.'}),
   ],
 };
 
-// Semana 5 — Circuito de fuerza-resistencia (5 rondas)
 const m2_d3_s5 = {
-  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — Fuerza-resistencia 5 rondas',
-  blockB:[
-    ex('Sentadilla trasera con barra',3,'6','RIR 2','2 min'),
-    ex('Press inclinado con mancuernas',3,'8','RIR 2','90 seg'),
-  ],
+  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — Semana 5',
+  blockB:[],
   blockC:[
-    ex('5 rondas — Circuito sem 5',1,'5 rondas','—','60 seg entre rondas',{notes:'Por ronda: 10 KB swing pesado + 8 box jump + 10 zancada c/mancuernas (5 c/lado) + 10 remo KB (5 c/lado) + 40 seg ski erg. Descansá 60 seg. Progresión respecto sem 2: más rondas, menos descanso.'}),
+    ex('Circuito A — AMRAP 15 min (versión avanzada)',1,'Max rondas','—','2 min pausa',{notes:'Ronda = 12 KB swing pesado + 10 goblet squat + 8 push-up + 200m remo. Mismo formato que sem 1 pero 3 min más — ¿cuántas rondas más hacés?'}),
+    ex('Circuito B — EMOM 12 min (6 estaciones)',1,'12 minutos','—','—',{notes:'Min 1: 12 KB swing pesado · Min 2: 10 wall balls · Min 3: 8 box jump · Min 4: 40 seg remo ergométrico · Min 5: 10 slam balls · Min 6: 30 seg ski erg. Repetís 2 veces. Más completo que sem 1.'}),
   ],
 };
 
-// Semana 6 — Chipper (completar todo una vez lo más rápido posible)
 const m2_d3_s6 = {
-  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — Chipper "For Time"',
-  blockB:[
-    ex('Peso muerto convencional c/barra',3,'6','RIR 2','2 min'),
-    ex('Dominadas asistidas o jalón supino',3,'8','RIR 2','90 seg'),
-  ],
+  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — Semana 6',
+  blockB:[],
   blockC:[
-    ex('Chipper — For Time',1,'Completar lo antes posible','—','—',{notes:'Completá en orden, una sola vez: 30 wall balls + 25 KB swing + 20 box jump + 15 burpees + 500m remo + 15 burpees + 20 KB swing + 25 push-up. Anotá tu tiempo — vas a volver a este chipper en sem 8.'}),
+    ex('Circuito A — Chipper for time',1,'Completar lo antes posible','—','3 min pausa',{notes:'En orden, una sola vez: 30 wall balls + 25 KB swing + 20 box jump + 15 burpees + 500m remo + 15 slam balls + 40 seg ski erg. Anotá tu tiempo — repetís este chipper en sem 8.'}),
+    ex('Circuito B — AMRAP 6 min de cierre',1,'Max rondas','—','—',{notes:'Ronda = 10 KB swing + 8 push-up + 40 seg ski erg. Intensidad alta. Cerrá la sesión fuerte.'}),
   ],
 };
 
-// Semana 7 — AMRAP 18 min (versión avanzada de sem 1)
 const m2_d3_s7 = {
-  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — AMRAP 18 min (intensivo)',
-  blockB:[
-    ex('Hip thrust c/barra (pausa 2 seg)',3,'10','RIR 1','90 seg'),
-    ex('Remo con barra T',3,'8','RIR 1','90 seg'),
-  ],
+  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — Semana 7',
+  blockB:[],
   blockC:[
-    ex('AMRAP 18 min — Circuito sem 7',1,'Max rondas','—','—',{notes:'Ronda = 12 KB swing pesado + 10 wall balls + 8 box jump + 10 push-up + 40 seg battle ropes. Comparala con sem 1: más tiempo, ronda más larga — ¿cuántas completás?'}),
+    ex('Circuito A — AMRAP 18 min (pico)',1,'Max rondas','—','2 min pausa',{notes:'Ronda = 12 KB swing pesado + 10 wall balls + 8 box jump + 10 push-up + 40 seg ski erg. Comparala con sem 1 (12 min): más tiempo, ronda más larga — ¿cuántas completás?'}),
+    ex('Circuito B — EMOM 10 min pico (5 estaciones)',1,'10 minutos','—','—',{notes:'Min 1: 10 burpees · Min 2: 40 seg remo máxima intensidad · Min 3: 12 slam balls · Min 4: 40 seg ski erg · Min 5: 10 box jump. Repetís 2 veces. Pico de intensidad del plan.'}),
   ],
 };
 
-// Semana 8 — Chipper "For Time" (repetición de sem 6 para medir progreso)
 const m2_d3_s8 = {
-  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — Chipper Final (testeo)',
-  blockB:[
-    ex('Sentadilla trasera con barra',3,'5','RIR 1','2 min'),
-    ex('Press inclinado con mancuernas',3,'8','RIR 0-1','90 seg'),
-  ],
+  dayLabel:'Día 3', dayType:'circuito', dayFocus:'Circuito Metabólico — Semana 8 (testeo final)',
+  blockB:[],
   blockC:[
-    ex('Chipper Final — For Time',1,'Completar lo antes posible','—','—',{notes:'Mismo chipper que semana 6: 30 wall balls + 25 KB swing + 20 box jump + 15 burpees + 500m remo + 15 burpees + 20 KB swing + 25 push-up. Comparás tu tiempo con semana 6 — esa diferencia es tu progreso real del bloque.'}),
+    ex('Circuito A — Chipper final for time',1,'Completar lo antes posible','—','3 min pausa',{notes:'Mismo chipper que sem 6: 30 wall balls + 25 KB swing + 20 box jump + 15 burpees + 500m remo + 15 slam balls + 40 seg ski erg. ¿Mejoraste el tiempo?'}),
+    ex('Circuito B — AMRAP 6 min de cierre',1,'Max rondas','—','—',{notes:'Mismo que sem 6: 10 KB swing + 8 push-up + 40 seg ski erg. ¿Más rondas que la última vez? Eso es tu progreso real de 8 semanas.'}),
   ],
 };
+
 // Mapear semana 1-4 (3 días × 4 semanas = 12 entradas)
 const m1 = [
   { ...m1_mie },   // Sem 1 — Día 1
@@ -834,9 +812,11 @@ function renderSession(week, dayIdx, session) {
 
   if (isCircuito) {
     // ── DÍA 3: CIRCUITO METABÓLICO ─────────────────────────────────────────
-    // Fase B — Fuerza base (tarjetas normales)
-    frag.appendChild(h('div', {className:'phase-label'}, 'Fase B — Fuerza base'));
-    session.blockB.forEach((e, i) => frag.appendChild(renderExCard(week, dayIdx, 'B', i, e)));
+    // Fase B — Fuerza base (solo si tiene ejercicios)
+    if (session.blockB && session.blockB.length > 0) {
+      frag.appendChild(h('div', {className:'phase-label'}, 'Fase B — Fuerza base'));
+      session.blockB.forEach((e, i) => frag.appendChild(renderExCard(week, dayIdx, 'B', i, e)));
+    }
 
     // Fase C — Circuito (bloque visual especial)
     if (session.blockC && session.blockC.length) {
