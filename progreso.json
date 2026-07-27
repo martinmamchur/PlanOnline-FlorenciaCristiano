@@ -1,6 +1,6 @@
 {
   "app": "plan-florencia-cristiano",
-  "exportedAt": "2026-07-27T18:40:23.216Z",
+  "exportedAt": "2026-07-27T18:45:36.457Z",
   "planStart": "",
   "logData": {
     "w1_d0_B__log0": {
@@ -106,6 +106,122 @@
       ],
       "comment": "",
       "kneeSensation": null
+    },
+    "w1_d1_B__log0": {
+      "sets": [
+        {
+          "kg": "10",
+          "reps": "10"
+        },
+        {
+          "kg": "10",
+          "reps": "10"
+        },
+        {
+          "kg": "10",
+          "reps": "10"
+        },
+        {
+          "kg": "10",
+          "reps": "10"
+        }
+      ],
+      "comment": "",
+      "kneeSensation": null
+    },
+    "w1_d1_C__log0": {
+      "sets": [
+        {
+          "kg": "10",
+          "reps": "12"
+        },
+        {
+          "kg": "10",
+          "reps": "12"
+        },
+        {
+          "kg": "10",
+          "reps": "12"
+        }
+      ],
+      "comment": "",
+      "kneeSensation": null
+    },
+    "w1_d1_B__log1": {
+      "sets": [
+        {
+          "kg": "22",
+          "reps": "10"
+        },
+        {
+          "kg": "22",
+          "reps": "10"
+        },
+        {
+          "kg": "22",
+          "reps": "10"
+        },
+        {
+          "kg": "22",
+          "reps": "10"
+        }
+      ],
+      "comment": "",
+      "kneeSensation": null
+    },
+    "w1_d1_C__log1": {
+      "sets": [
+        {
+          "kg": "4.5",
+          "reps": "15"
+        },
+        {
+          "kg": "4.5",
+          "reps": "15"
+        },
+        {
+          "kg": "4.5",
+          "reps": "15"
+        }
+      ],
+      "comment": "",
+      "kneeSensation": null
+    },
+    "w1_d1_C__log2": {
+      "sets": [
+        {
+          "kg": "13",
+          "reps": "12"
+        },
+        {
+          "kg": "13",
+          "reps": "12"
+        },
+        {
+          "kg": "13",
+          "reps": "12"
+        }
+      ],
+      "comment": "Contando barra W",
+      "kneeSensation": null
+    },
+    "w1_d1_C__log3": {
+      "sets": [
+        {
+          "kg": "22",
+          "reps": "15"
+        },
+        {
+          "kg": "22",
+          "reps": "15"
+        },
+        {
+          "kg": "22",
+          "reps": "15"
+        }
+      ],
+      "comment": "",
+      "kneeSensation": null
     }
   },
   "videos": {
@@ -178,6 +294,8 @@
     "calentamiento__core3": ""
   },
   "sessionDone": {
-    "w1_d0__done": true
+    "w1_d0__done": true,
+    "w1_d1__done": true,
+    "w1_d2__done": true
   }
 }
