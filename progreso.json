@@ -1,6 +1,6 @@
 {
   "app": "plan-florencia-cristiano",
-  "exportedAt": "2026-08-05T20:30:27.641Z",
+  "exportedAt": "2026-08-05T20:30:47.432Z",
   "planStart": "",
   "logData": {
     "w1_d0_B__log0": {
@@ -326,6 +326,28 @@
         {
           "kg": "30",
           "reps": "10"
+        }
+      ],
+      "comment": "Barra de 15 ",
+      "kneeSensation": null
+    },
+    "w3_d0_B__log1": {
+      "sets": [
+        {
+          "kg": "35",
+          "reps": "10"
+        },
+        {
+          "kg": "35",
+          "reps": "10"
+        },
+        {
+          "kg": "",
+          "reps": ""
+        },
+        {
+          "kg": "",
+          "reps": ""
         }
       ],
       "comment": "Barra de 15 ",
