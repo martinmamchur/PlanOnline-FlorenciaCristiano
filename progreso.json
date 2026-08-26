@@ -1,6 +1,6 @@
 {
   "app": "plan-florencia-cristiano",
-  "exportedAt": "2026-08-26T21:09:32.568Z",
+  "exportedAt": "2026-08-26T21:09:53.918Z",
   "planStart": "",
   "logData": {
     "w1_d0_B__log0": {
@@ -956,6 +956,28 @@
         }
       ],
       "comment": "",
+      "kneeSensation": null
+    },
+    "w6_d1_B__log1": {
+      "sets": [
+        {
+          "kg": "18",
+          "reps": "10"
+        },
+        {
+          "kg": "18",
+          "reps": "10"
+        },
+        {
+          "kg": "18",
+          "reps": "10"
+        },
+        {
+          "kg": "18",
+          "reps": "10"
+        }
+      ],
+      "comment": "Remo con barra E",
       "kneeSensation": null
     }
   },
