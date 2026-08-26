@@ -221,6 +221,7 @@ input::placeholder,textarea::placeholder{color:var(--faint);}
     <div id="header-btns">
       <button class="hbtn" onclick="ghSaveProgress()" style="border-color:var(--lime);color:var(--lime);">☁ SINCRONIZAR</button>
       <button class="hbtn" onclick="reloadProgress()" style="border-color:var(--accent);color:var(--accent);">🔄 ACTUALIZAR</button>
+      <button class="hbtn" onclick="showTokenUI()" style="border-color:var(--dim);color:var(--dim);">🔑 TOKEN</button>
       <button id="readonly-toggle-btn" class="hbtn" onclick="toggleReadOnlyMode()">👁 MODO LECTURA: OFF</button>
       <button class="hbtn hbtn-dim" onclick="resetAll()">REINICIAR DATOS</button>
       <div id="sync-msg" style="font-size:12px;margin-top:4px;"></div>
@@ -1430,6 +1431,7 @@ async function ghSaveProgress(){
     const body={message:'Progreso Florencia — '+new Date().toLocaleString(),content,...(sha?{sha}:{})};
     const r=await fetch(apiUrl,{method:'PUT',headers,body:JSON.stringify(body)});
     if(r.ok){ showSyncMsg('☁ Sincronizado en GitHub','ok'); }
+    else if(r.status===401||r.status===403){ showSyncMsg('✗ Tu token venció o es inválido — pegá uno nuevo','err'); showTokenUI(); }
     else{ showSyncMsg('✗ Error al sincronizar ('+r.status+')','err'); }
   }catch(e){ showSyncMsg('✗ Error al sincronizar','err'); }
 }
