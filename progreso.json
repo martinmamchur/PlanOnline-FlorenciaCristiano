@@ -1,6 +1,6 @@
 {
   "app": "plan-florencia-cristiano",
-  "exportedAt": "2026-08-26T21:08:48.981Z",
+  "exportedAt": "2026-08-26T21:08:56.273Z",
   "planStart": "",
   "logData": {
     "w1_d0_B__log0": {
@@ -961,19 +961,19 @@
     "w6_d1_B__log1": {
       "sets": [
         {
-          "kg": "1818",
+          "kg": "18",
+          "reps": "10"
+        },
+        {
+          "kg": "18",
           "reps": ""
         },
         {
-          "kg": "",
+          "kg": "18",
           "reps": ""
         },
         {
-          "kg": "",
-          "reps": ""
-        },
-        {
-          "kg": "",
+          "kg": "18",
           "reps": ""
         }
       ],
