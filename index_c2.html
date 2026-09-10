@@ -1697,7 +1697,22 @@ function showSyncMsg(text,type){const el=document.getElementById('sync-msg');if(
 async function ghLoadProgress(){try{const res=await fetch(WORKER_URL+'?repo='+WORKER_REPO+'&file=progreso_c2.json&t='+Date.now());if(!res.ok)return null;return await res.json();}catch(e){return null;}}
 async function ghLoadCiclo1(){try{const res=await fetch(WORKER_URL+'?repo='+WORKER_REPO+'&file=progreso.json&t='+Date.now());if(!res.ok)return null;return await res.json();}catch(e){return null;}}
 async function ghSaveProgress(){showSyncMsg('Sincronizando...','');const data={app:'plan-florencia-ceo-c2',exportedAt:new Date().toISOString(),planStart:state.planStart,logData:state.logData,videos:state.videos,sessionDone:state.sessionDone};try{const res=await fetch(WORKER_URL+'?repo='+WORKER_REPO+'&file=progreso_c2.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});if(res.ok){showSyncMsg('☁ Sincronizado','ok');}else{showSyncMsg('✗ Error ('+res.status+')','err');}}catch(e){showSyncMsg('✗ Error','err');}}
-async function reloadProgress(){showSyncMsg('Actualizando...','');try{const p=await ghLoadProgress();if(p&&p.logData&&p.app==='plan-florencia-ceo-c2'){state.logData=p.logData;state.sessionDone=p.sessionDone||{};if(p.planStart)state.planStart=p.planStart;storageSet('logData',state.logData);storageSet('sessionDone',state.sessionDone);storageSet('planStart',state.planStart);renderHeader();renderPlan();showSyncMsg('✓ Actualizado','ok');}else{showSyncMsg('Sin datos del Ciclo 2 en GitHub','');}}catch(e){showSyncMsg('✗ Error','err');}}
+async function reloadProgress(){
+  showSyncMsg('Actualizando...','');
+  try {
+    const p = await ghLoadProgress();
+    if(p && p.logData && p.app==='plan-florencia-ceo-c2'){
+      state.logData=p.logData; state.sessionDone=p.sessionDone||{};
+      if(p.planStart) state.planStart=p.planStart;
+      storageSet('logData',state.logData); storageSet('sessionDone',state.sessionDone); storageSet('planStart',state.planStart);
+    }
+    // También recargar historial del Ciclo 1
+    const c1 = await ghLoadCiclo1();
+    if(c1 && c1.logData) state.logDataC1 = c1.logData;
+    renderHeader(); renderPlan();
+    showSyncMsg('✓ Actualizado','ok');
+  } catch(e){ showSyncMsg('✗ Error','err'); }
+}
 
 /* ============================================================ EXPORT / IMPORT */
 function resetAll() {
