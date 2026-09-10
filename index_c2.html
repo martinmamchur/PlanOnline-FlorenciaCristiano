@@ -244,11 +244,7 @@ input::placeholder,textarea::placeholder{color:var(--faint);}
       <div class="mono" id="header-meta">PLAN DE PREPARACIÓN · <span id="date-range">—</span></div>
     </div>
     <div id="header-btns">
-      <button class="hbtn" onclick="ghSaveProgress()" style="border-color:var(--lime);color:var(--lime);">☁ SINCRONIZAR</button>
-      <button class="hbtn" onclick="reloadProgress()" style="border-color:var(--accent);color:var(--accent);">🔄 ACTUALIZAR</button>
-      <button class="hbtn" onclick="showTokenUI()" style="border-color:var(--dim);color:var(--dim);">🔑 TOKEN</button>
-      <button id="readonly-toggle-btn" class="hbtn" onclick="toggleReadOnlyMode()">👁 MODO LECTURA: OFF</button>
-      <button class="hbtn hbtn-dim" onclick="resetAll()">REINICIAR DATOS</button>
+      <button class="hbtn" onclick="reloadProgress()" style="border-color:var(--dim);color:var(--dim);font-size:11px;">🔄 Cargar mis datos</button>
       <div id="sync-msg" style="font-size:12px;margin-top:4px;"></div>
       <div id="token-ui" style="display:none;margin-top:8px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;"><div style="font-size:11px;color:var(--dim);margin-bottom:6px;letter-spacing:.08em;text-transform:uppercase;">Token de GitHub para sincronizar</div><div style="display:flex;gap:8px;"><input id="token-input" type="password" placeholder="ghp_..." style="flex:1;padding:8px;border-radius:6px;border:1px solid var(--border);background:#1a1a1a;color:#fff;font-size:13px;"/><button onclick="saveTokenAndClose()" style="padding:8px 14px;border-radius:6px;border:1px solid var(--lime);background:transparent;color:var(--lime);font-size:13px;cursor:pointer;">Guardar</button><button onclick="showTokenUI()" style="padding:8px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--dim);font-size:13px;cursor:pointer;">Cancelar</button></div><div style="font-size:11px;color:var(--dim);margin-top:6px;">El token se guarda solo en este navegador.</div></div>
     </div>
