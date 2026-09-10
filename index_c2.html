@@ -804,8 +804,8 @@ function adaptSession(session,timeMode,energyMode,_week,_dayIdx){
     if(energyMode!=='high') badge = badge==='normal' ? 'reduced' : badge;
     return{...s,ceoBadge:badge,ceoNote:note||null,ceoMod:note?{note}:null};
   }
-  if(timeMode==='reduced'){s.blockC=[];s.blockD=null;badge='reduced';}
-  else if(timeMode==='minimal'){s.blockB=orig.blockB.slice(0,2);s.blockC=[];s.blockD=null;badge='minimal';}
+  if(timeMode==='reduced'){s.blockB=orig.blockB.map(e=>({...e,sets:Math.min(e.sets,3)}));s.blockC=[];s.blockD=null;badge='reduced';}
+  else if(timeMode==='minimal'){s.blockB=orig.blockB.slice(0,2).map(e=>({...e,sets:Math.min(e.sets,2)}));s.blockC=[];s.blockD=null;badge='minimal';}
   if(energyMode==='medium'){s.blockB=s.blockB.map(e=>({...e,rir:adjRIR(e.rir,1)}));s.blockC=s.blockC.map(e=>({...e,rir:adjRIR(e.rir,1)}));if(badge==='normal')badge='reduced';}
   else if(energyMode==='low'){s.blockB=s.blockB.map(e=>({...e,rir:adjRIR(e.rir,2)}));s.blockC=s.blockC.map(e=>({...e,rir:adjRIR(e.rir,2)}));if(badge==='normal')badge='reduced';}
   const tNotes={normal:'',reduced:'Con el tiempo disponible, priorizamos los ejercicios principales — son los que más impacto tienen en tu objetivo.',minimal:'Con poco tiempo, los 2 ejercicios base son suficientes para mantener el estímulo muscular y seguir avanzando.'};
@@ -872,9 +872,6 @@ function renderSession(week, dayIdx, session, _tMode, _eMode) {
         ceoBadge: adapted.ceoBadge || 'normal',
         ceoNote: adapted.ceoNote || null,
       });
-      if(sessionToRender.dayType !== 'circuito') {
-        console.log('FUERZA:', tMode, eMode, 'blockB:', (sessionToRender.blockB||[]).length, 'blockC:', (sessionToRender.blockC||[]).length, 'RIR0:', sessionToRender.blockB&&sessionToRender.blockB[0]?sessionToRender.blockB[0].rir:'?');
-      }
       const area = document.getElementById('session-area');
       if (area) { area.innerHTML = ''; area.appendChild(renderSession(week, dayIdx, sessionToRender, tMode, eMode)); }
     });
