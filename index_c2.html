@@ -770,9 +770,20 @@ function adaptSession(session,timeMode,energyMode,_week,_dayIdx){
     };
 
     if(timeMode==='minimal'){
-      s.blockC = applyVariants(orig.blockC.slice(0,1), energyMode);
+      // Solo Circuito A, formato según energía, versión corta
+      const minimalVariants = {
+        high:   (key) => CIRCUIT_VARIANTS[key] ? { ...CIRCUIT_VARIANTS[key].high,   name: CIRCUIT_VARIANTS[key].high.name.replace(/\d+ min/, '8 min').replace(/AMRAP \d+/, 'AMRAP 8').replace(/\d+ rondas/, '2 rondas') } : null,
+        medium: (key) => CIRCUIT_VARIANTS[key] ? { ...CIRCUIT_VARIANTS[key].medium, name: CIRCUIT_VARIANTS[key].medium.name.replace(/\d+ min/, '8 min').replace(/EMOM \d+/, 'EMOM 8') } : null,
+        low:    (key) => CIRCUIT_VARIANTS[key] ? { ...CIRCUIT_VARIANTS[key].low,    name: CIRCUIT_VARIANTS[key].low.name.replace(/\d+ rondas/, '2 rondas') } : null,
+      };
+      s.blockC = orig.blockC.slice(0,1).map((circ, i) => {
+        const circKey = 's' + (_week||1) + '_c' + (i+1);
+        const v = minimalVariants[energyMode] ? minimalVariants[energyMode](circKey) : null;
+        return v ? { ...circ, name: v.name, reps: v.reps || circ.reps, rest: v.rest || circ.rest, notes: v.notes || circ.notes } : circ;
+      });
       badge='minimal';
     } else if(timeMode==='reduced'){
+      // Solo Circuito A, formato completo según energía
       s.blockC = applyVariants(orig.blockC.slice(0,1), energyMode);
       badge='reduced';
     } else {
