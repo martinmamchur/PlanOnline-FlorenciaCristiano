@@ -6,7 +6,10 @@
 <title>Método CEO — Florencia · Ciclo 2</title>
 <style>
 
+
 :root{
+  --font-main:'Outfit',sans-serif;
+  --font-mono:'Space Mono',monospace;
   --ceo-blue:#82b7d9;--ceo-gold:#5a4800;--ceo-gold-light:#8c6f00;--ceo-gold-dim:rgba(90,72,0,.18);--ceo-blue-dim:rgba(130,183,217,.12);
   --bg:#0a0a0a; --surface:#161616; --surface2:#1d1d1d; --surface3:#232323;
   --border:#2b2b2b; --accent:#82b7d9; --accent-dim:#0f1e2d;
@@ -26,7 +29,6 @@ input::placeholder,textarea::placeholder{color:var(--faint);}
 /* Layout */
 #header{padding:18px;border-bottom:1px solid var(--border);}
 #header-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;}
-#header-meta{font-size:11px;color:var(--faint);margin-top:6px;letter-spacing:.08em;}
 #header-btns{display:flex;gap:6px;flex-wrap:wrap;}
 #import-msg{margin-top:10px;padding:9px 12px;border-radius:7px;font-size:12.5px;display:none;}
 #import-msg.ok{background:rgba(130,183,217,.08);border:1px solid var(--lime);color:var(--lime);display:block;}
@@ -220,7 +222,16 @@ input::placeholder,textarea::placeholder{color:var(--faint);}
 .recipe-macro-pill{background:#1a1a1a;border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:11px;color:var(--dim);}
 .recipe-macro-pill span{color:var(--ceo-blue);font-weight:700;}
 
+
+.mono, .phase-label, .week-btn, .rir-badge, .pill, .badge,
+.ex-pills span, .prog-note .phase-label,
+#block-label, #block-focus { font-family:'Space Mono',monospace !important; }
+body, button, input, textarea, select { font-family:'Outfit',sans-serif; }
+h1, h2, h3, .plan-name, #session-title { font-family:'Outfit',sans-serif; letter-spacing:-.02em; }
+.ceo-selector-title, .ceo-label, .recipe-tag, .recipe-section { font-family:'Space Mono',monospace; }
+
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -241,7 +252,6 @@ input::placeholder,textarea::placeholder{color:var(--faint);}
         <span id="student-name-display" onclick="startEditName()"></span>
         <input id="student-name-input" type="text" placeholder="NOMBRE" onblur="commitName()" onkeydown="if(event.key==='Enter')commitName()"/>
       </div>
-      <div class="mono" id="header-meta">PLAN DE PREPARACIÓN · <span id="date-range">—</span></div>
     </div>
     <div id="header-btns">
       <button class="hbtn" onclick="reloadProgress()" style="border-color:var(--dim);color:var(--dim);font-size:11px;">🔄 Cargar mis datos</button>
@@ -499,7 +509,7 @@ function renderHeader() {
   const nameInput = document.getElementById('student-name-input');
   nameEl.textContent = state.studentName ? '– ' + state.studentName.toUpperCase() : 'TOCAR PARA PONER NOMBRE';
 
-  document.getElementById('date-range').textContent = dateRange();
+  const drEl = document.getElementById('date-range'); if(drEl) drEl.textContent = dateRange();
   document.getElementById('completed-count').textContent = completedWeeks();
 
   const cw = completedWeeks();
@@ -1042,14 +1052,24 @@ function renderSession(week, dayIdx, session, _tMode, _eMode) {
       renderExerciseList(frag, session.blockC, week, dayIdx, 'C');
     }
 
-    // Fase D
-    const faseDText = session.phaseD || (isUpper
-      ? 'Podés cerrar con 5-8 min de movilidad de hombros y estiramiento de pectorales.'
-      : 'Si terminaste con energía, sumá 8-12 min de cardio en bici o caminadora a ritmo sostenido (RPE 5-6).');
-    frag.appendChild(h('div', {className:'phase-d'},
-      h('strong', null, isUpper ? 'Movilidad de cierre:' : 'Cardio opcional:'),
-      faseDText
-    ));
+    // Fase D — adaptada según energía
+    const energyForD = _eMode || 'high';
+    if (energyForD !== 'low') {
+      let faseDText;
+      if (isUpper) {
+        faseDText = 'Cerrá con 5-8 min de movilidad de hombros y estiramiento de pectorales.';
+      } else if (energyForD === 'high') {
+        faseDText = session.blockD && session.blockD.detail
+          ? session.blockD.detail + ' — cardio de cierre.'
+          : 'Si tenés energía, sumá 10-12 min de cardio LISS (caminadora inclinada o bici) a RPE 5-6.';
+      } else {
+        faseDText = 'Si te quedó tiempo, sumá 6-8 min de caminata suave. Sin presión — con energía media alcanza con cerrar tranquila.';
+      }
+      frag.appendChild(h('div', {className:'phase-d'},
+        h('strong', null, isUpper ? 'Movilidad de cierre:' : 'Cardio opcional:'),
+        faseDText
+      ));
+    }
   }
 
   return frag;
@@ -1097,7 +1117,7 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeVi
 
 // ── Detectar si un nombre es parte de superserie ─────────────────────────────
 function isSS(name) { return /^SS [AB]\d:/i.test(name); }
-function getSupersetGroup(name) { const m = name.match(/^SS ([AB]\d):/i); return m ? m[1] : null; }
+function getSupersetGroup(name) { const m = name.match(/^SS ([AB])\d:/i); return m ? m[1] : null; }
 function getSSBaseName(name) { return name.replace(/^SS [AB]\d:\s*/i, ''); }
 
 // ── Explicaciones de técnicas avanzadas ──────────────────────────────────────
