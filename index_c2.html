@@ -872,6 +872,9 @@ function renderSession(week, dayIdx, session, _tMode, _eMode) {
         ceoBadge: adapted.ceoBadge || 'normal',
         ceoNote: adapted.ceoNote || null,
       });
+      if(sessionToRender.dayType !== 'circuito') {
+        console.log('FUERZA:', tMode, eMode, 'blockB:', (sessionToRender.blockB||[]).length, 'blockC:', (sessionToRender.blockC||[]).length, 'RIR0:', sessionToRender.blockB&&sessionToRender.blockB[0]?sessionToRender.blockB[0].rir:'?');
+      }
       const area = document.getElementById('session-area');
       if (area) { area.innerHTML = ''; area.appendChild(renderSession(week, dayIdx, sessionToRender, tMode, eMode)); }
     });
