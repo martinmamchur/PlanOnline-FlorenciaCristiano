@@ -1181,6 +1181,7 @@ function findLastRecord(exName, currentWeek, currentDayIdx, currentPhase, curren
 
 
 function renderExCard(week, dayIdx, phase, idx, exObj) {
+  if(phase==='B' && idx===0) console.log('renderExCard sets:', exObj.sets, 'name:', exObj.name);
   const dayKey = `w${week}_d${dayIdx}_${phase}`;
   const logKey = `${dayKey}__log${idx}`;
   const vidKey = exObj.name; // clave = nombre del ejercicio, coincide con videos.json
