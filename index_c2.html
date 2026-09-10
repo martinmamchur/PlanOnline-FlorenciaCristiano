@@ -633,7 +633,126 @@ function renderExerciseList(frag, exercises, week, dayIdx, phase) {
 
 // ════════════════════════════════ MÉTODO CEO ════════════════════════════════
 
-function adaptSession(session,timeMode,energyMode){
+
+// ════════════════════════════════════════════════════════════════
+// VARIANTES DE CIRCUITO POR NIVEL DE ENERGÍA
+// alta → AMRAP/For time | media → EMOM | baja → Pausa fija
+// ════════════════════════════════════════════════════════════════
+
+const CIRCUIT_VARIANTS = {
+  // Semana 1
+  's1_c1': {
+    high:  { name:'Circuito A — AMRAP 14 min', reps:'Max rondas', rest:'2 min pausa', notes:'Ronda = 12 KB swing + 10 goblet squat + 8 push-up + 10 box jump. Sin pausa entre ejercicios — vas al límite. Esta es tu marca base del Ciclo 2.' },
+    medium:{ name:'Circuito A — EMOM 14 min (7 estaciones × 2)', reps:'14 minutos', rest:'—', notes:'Min 1: 10 KB swing · Min 2: 8 goblet squat · Min 3: 8 push-up · Min 4: 8 box jump · Min 5: 10 KB swing · Min 6: 8 goblet squat · Min 7: descanso. Repetís 2 veces. El minuto regula tu esfuerzo.' },
+    low:   { name:'Circuito A — 4 rondas con pausa fija', reps:'4 rondas', rest:'60 seg entre rondas', notes:'Por ronda: 10 KB swing + 8 goblet squat + 6 push-up + 6 box jump. 60 seg de pausa entre rondas. Ritmo controlado, técnica primero.' }
+  },
+  's1_c2': {
+    high:  { name:'Circuito B — EMOM 10 min (5 estaciones)', reps:'10 min', rest:'—', notes:'Min 1: 12 wall balls · Min 2: 10 slam balls · Min 3: 8 burpees · Min 4: 40 seg ski erg · Min 5: 10 box jump. Repetís 2 veces.' },
+    medium:{ name:'Circuito B — 5 estaciones × 2 rondas', reps:'2 rondas', rest:'45 seg entre ejercicios', notes:'45 seg trabajo / 15 seg transición: wall balls → slam balls → burpees → ski erg → box jump. 45 seg de pausa entre rondas. Ritmo sostenible.' },
+    low:   { name:'Circuito B — Trabajo continuo suave', reps:'8 min flujo', rest:'—', notes:'Flujo continuo sin pausa: 8 wall balls → 8 slam balls → 6 burpees → 30 seg ski erg suave → 6 box jump step-up. Repetís a tu ritmo durante 8 min.' }
+  },
+  // Semana 2
+  's2_c1': {
+    high:  { name:'Circuito A — 5 rondas for time', reps:'5 rondas', rest:'90 seg entre rondas', notes:'Por ronda: 12 wall balls + 10 KB swing + 10 zancada KB (5 c/lado) + 30 seg remo. Anotá el tiempo total — es tu referencia.' },
+    medium:{ name:'Circuito A — EMOM 15 min (5 estaciones)', reps:'15 min', rest:'—', notes:'Min 1: 10 wall balls · Min 2: 10 KB swing · Min 3: 8 zancada KB (4 c/lado) · Min 4: 30 seg remo · Min 5: descanso activo (marcha). Repetís 3 veces.' },
+    low:   { name:'Circuito A — 4 rondas con pausa amplia', reps:'4 rondas', rest:'75 seg entre rondas', notes:'Por ronda: 8 wall balls + 8 KB swing + 6 zancada KB (3 c/lado) + 25 seg remo. 75 seg de pausa. Objetivo: completar con buena técnica.' }
+  },
+  's2_c2': {
+    high:  { name:'Circuito B — AMRAP 8 min', reps:'Max rondas', rest:'—', notes:'Ronda = 8 burpees + 10 slam balls + 40 seg ski erg + 10 KB swing. Sin pausas.' },
+    medium:{ name:'Circuito B — EMOM 8 min', reps:'8 min', rest:'—', notes:'Min 1: 6 burpees + 8 slam balls · Min 2: 35 seg ski erg + 8 KB swing · Repetís 4 veces. El minuto te da estructura.' },
+    low:   { name:'Circuito B — 3 rondas con pausa fija', reps:'3 rondas', rest:'60 seg entre rondas', notes:'Por ronda: 5 burpees + 8 slam balls + 30 seg ski erg suave + 8 KB swing. Sin apuro. 60 seg de pausa.' }
+  },
+  // Semana 3
+  's3_c1': {
+    high:  { name:'Circuito A — Tabata KB thruster (8 min)', reps:'8 × 20seg/10seg', rest:'2 min pausa', notes:'20 seg KB thruster (sentadilla + press) / 10 seg pausa × 8 rondas. Movimiento complejo — máxima intensidad en los 20 seg.' },
+    medium:{ name:'Circuito A — Intervalos KB thruster (10 min)', reps:'10 min', rest:'—', notes:'30 seg KB thruster / 30 seg pausa × 10 rondas. El 1:1 de trabajo:pausa te permite mantener buena técnica sin saturarte.' },
+    low:   { name:'Circuito A — KB thruster cadencia controlada', reps:'4 × 8 reps', rest:'60 seg entre series', notes:'4 series de 8 KB thruster a ritmo controlado. 60 seg de pausa entre series. Foco en técnica del movimiento combinado.' }
+  },
+  's3_c2': {
+    high:  { name:'Circuito B — Tabata 5 estaciones (10 min)', reps:'2 rondas × 5 estaciones', rest:'1 min pausa entre rondas', notes:'20/10: box jump → push-up → slam balls → 40 seg ski erg → burpees. Vas al máximo en los 20 seg.' },
+    medium:{ name:'Circuito B — 5 estaciones 30/30', reps:'2 rondas', rest:'1 min entre rondas', notes:'30 seg trabajo / 30 seg pausa: box jump → push-up → slam balls → ski erg → burpees. El 1:1 regula el esfuerzo.' },
+    low:   { name:'Circuito B — 3 rondas con pausa generosa', reps:'3 rondas', rest:'75 seg entre rondas', notes:'Por ronda: 6 box jump + 8 push-up + 8 slam balls + 30 seg ski erg suave + 5 burpees. Pausa generosa entre rondas.' }
+  },
+  // Semana 4
+  's4_c1': {
+    high:  { name:'Circuito A — EMOM 16 min (4 estaciones)', reps:'16 min', rest:'2 min pausa', notes:'Min 1: 12 wall balls · Min 2: 10 KB swing pesado · Min 3: 8 burpees · Min 4: 250m remo. Repetís 4 veces. Cada minuto es un desafío.' },
+    medium:{ name:'Circuito A — EMOM 12 min adaptado', reps:'12 min', rest:'2 min pausa', notes:'Min 1: 10 wall balls · Min 2: 8 KB swing · Min 3: 6 burpees + 200m remo. Repetís 4 veces. Volumen reducido por minuto.' },
+    low:   { name:'Circuito A — 3 rondas con pausa fija', reps:'3 rondas', rest:'75 seg entre rondas', notes:'Por ronda: 8 wall balls + 8 KB swing + 5 burpees + 200m remo suave. 75 seg de pausa. Completar con técnica limpia.' }
+  },
+  's4_c2': {
+    high:  { name:'Circuito B — AMRAP 6 min cierre', reps:'Max rondas', rest:'—', notes:'Ronda = 10 KB swing + 8 push-up + 40 seg ski erg. Vas al límite en el cierre.' },
+    medium:{ name:'Circuito B — EMOM 6 min cierre', reps:'6 min', rest:'—', notes:'Min 1: 10 KB swing + 8 push-up · Min 2: 40 seg ski erg + descanso. Repetís 3 veces. Cierre estructurado.' },
+    low:   { name:'Circuito B — 3 rondas suaves de cierre', reps:'3 rondas', rest:'45 seg entre rondas', notes:'Por ronda: 8 KB swing + 6 push-up + 30 seg ski erg suave. Cierre tranquilo para bajar pulsaciones.' }
+  },
+  // Semana 5
+  's5_c1': {
+    high:  { name:'Circuito A — AMRAP 16 min', reps:'Max rondas', rest:'2 min pausa', notes:'Ronda = 12 KB swing pesado + 10 goblet squat + 8 push-up + 10 box jump. 2 min más que sem 1 — ¿cuántas rondas más?' },
+    medium:{ name:'Circuito A — EMOM 16 min (8 estaciones × 2)', reps:'16 min', rest:'—', notes:'Min 1: 10 KB swing · Min 2: 8 goblet squat · Min 3: 8 push-up · Min 4: 8 box jump · Min 5-8: repetís. 2 rondas completas.' },
+    low:   { name:'Circuito A — 4 rondas con pausa fija', reps:'4 rondas', rest:'75 seg entre rondas', notes:'Por ronda: 10 KB swing + 8 goblet squat + 6 push-up + 6 box jump. Mismos ejercicios que sem 1 baja energía, un poco más.' }
+  },
+  's5_c2': {
+    high:  { name:'Circuito B — EMOM 12 min (6 estaciones)', reps:'12 min', rest:'—', notes:'Min 1: 12 KB swing · Min 2: 10 wall balls · Min 3: 8 burpees · Min 4: 40 seg remo · Min 5: 10 slam balls · Min 6: 40 seg ski erg. Repetís 2 veces.' },
+    medium:{ name:'Circuito B — 6 estaciones 35/25', reps:'2 rondas', rest:'1 min entre rondas', notes:'35 seg trabajo / 25 seg pausa: KB swing → wall balls → burpees → remo → slam balls → ski erg. 1 min entre rondas.' },
+    low:   { name:'Circuito B — 3 rondas controladas', reps:'3 rondas', rest:'60 seg entre rondas', notes:'Por ronda: 8 KB swing + 8 wall balls + 5 burpees + 25 seg remo + 8 slam balls + 25 seg ski erg suave. Pausa 60 seg.' }
+  },
+  // Semana 6
+  's6_c1': {
+    high:  { name:'Circuito A — Chipper for time', reps:'Completar lo antes posible', rest:'3 min pausa', notes:'30 wall balls + 25 KB swing + 20 box jump + 15 burpees + 500m remo + 15 slam balls + 50 seg ski erg. Anotá tu tiempo — repetís en sem 8.' },
+    medium:{ name:'Circuito A — Chipper por bloques', reps:'Completar lo antes posible', rest:'90 seg pausa a la mitad', notes:'Bloque 1: 20 wall balls + 15 KB swing + 12 box jump. Pausa 90 seg. Bloque 2: 10 burpees + 400m remo + 10 slam balls + 40 seg ski erg. Anotá tiempo total.' },
+    low:   { name:'Circuito A — Chipper reducido with pause', reps:'Completar a tu ritmo', rest:'Pausa cuando necesites', notes:'20 wall balls + 15 KB swing + 12 box jump + 8 burpees + 300m remo + 10 slam balls + 30 seg ski erg. Podés pausar cuando lo necesites. El objetivo es completarlo.' }
+  },
+  's6_c2': {
+    high:  { name:'Circuito B — AMRAP 8 min cierre', reps:'Max rondas', rest:'—', notes:'Ronda = 10 KB swing pesado + 8 push-up + 50 seg ski erg. Más exigente que el del Ciclo 1.' },
+    medium:{ name:'Circuito B — EMOM 8 min cierre', reps:'8 min', rest:'—', notes:'Min 1: 10 KB swing + 8 push-up · Min 2: 50 seg ski erg + descanso. Repetís 4 veces.' },
+    low:   { name:'Circuito B — Cierre suave 3 rondas', reps:'3 rondas', rest:'60 seg entre rondas', notes:'8 KB swing + 6 push-up + 35 seg ski erg suave. Cierre tranquilo.' }
+  },
+  // Semana 7
+  's7_c1': {
+    high:  { name:'Circuito A — AMRAP 20 min (pico máximo)', reps:'Max rondas', rest:'2 min pausa', notes:'Ronda = 12 KB swing pesado + 10 wall balls + 8 box jump + 8 push-up + 50 seg ski erg. El AMRAP más largo. Comparás con sem 1 y 5.' },
+    medium:{ name:'Circuito A — EMOM 20 min (5 estaciones × 4)', reps:'20 min', rest:'—', notes:'Min 1: 10 KB swing · Min 2: 8 wall balls · Min 3: 8 box jump · Min 4: 8 push-up · Min 5: 40 seg ski erg. Repetís 4 veces.' },
+    low:   { name:'Circuito A — 4 rondas con pausa generosa', reps:'4 rondas', rest:'90 seg entre rondas', notes:'Por ronda: 10 KB swing + 8 wall balls + 6 box jump + 6 push-up + 35 seg ski erg. 90 seg de pausa. Pico de volumen con gestión de energía.' }
+  },
+  's7_c2': {
+    high:  { name:'Circuito B — EMOM 10 min pico', reps:'10 min', rest:'—', notes:'Min 1: 10 burpees · Min 2: 50 seg remo máximo · Min 3: 12 slam balls · Min 4: 50 seg ski erg · Min 5: 10 box jump. Repetís 2 veces.' },
+    medium:{ name:'Circuito B — 5 estaciones 30/30', reps:'2 rondas', rest:'1 min entre rondas', notes:'30 seg trabajo / 30 seg pausa: burpees → remo → slam balls → ski erg → box jump.' },
+    low:   { name:'Circuito B — 3 rondas controladas cierre', reps:'3 rondas', rest:'75 seg entre rondas', notes:'6 burpees + 30 seg remo suave + 8 slam balls + 30 seg ski erg + 6 box jump. Cierre digno con buena técnica.' }
+  },
+  // Semana 8
+  's8_c1': {
+    high:  { name:'Circuito A — Chipper final for time', reps:'Completar lo antes posible', rest:'3 min pausa', notes:'Mismo que sem 6: 30 wall balls + 25 KB swing + 20 box jump + 15 burpees + 500m remo + 15 slam balls + 50 seg ski erg. ¿Mejoraste el tiempo?' },
+    medium:{ name:'Circuito A — Chipper final por bloques', reps:'Completar lo antes posible', rest:'90 seg pausa a la mitad', notes:'Bloque 1: 20 wall balls + 15 KB swing + 12 box jump. Pausa 90 seg. Bloque 2: 10 burpees + 400m remo + 10 slam balls + 40 seg ski erg. Comparás con sem 6.' },
+    low:   { name:'Circuito A — Chipper final a tu ritmo', reps:'Completar a tu ritmo', rest:'Pausa cuando necesites', notes:'Mismo chipper reducido que sem 6. Pausás cuando lo necesités. Cerrar el ciclo completando el trabajo es lo que importa.' }
+  },
+  's8_c2': {
+    high:  { name:'Circuito B — AMRAP 8 min final', reps:'Max rondas', rest:'—', notes:'Mismo que sem 6. Tu progreso real del Ciclo 2.' },
+    medium:{ name:'Circuito B — EMOM 8 min final', reps:'8 min', rest:'—', notes:'Mismo que sem 6 versión media. Cerrás el ciclo con estructura.' },
+    low:   { name:'Circuito B — Cierre suave final', reps:'3 rondas', rest:'60 seg entre rondas', notes:'8 KB swing + 6 push-up + 35 seg ski erg suave. Cerrás el Ciclo 2 a tu ritmo.' }
+  }
+};
+
+// Mapeo de cada circuito a su clave de variantes
+const CIRCUIT_KEY_MAP = [
+  null, null, 's1',  // sem 1: d1, d2, d3
+  null, null, 's2',  // sem 2
+  null, null, 's3',  // sem 3
+  null, null, 's4',  // sem 4
+  null, null, 's5',  // sem 5
+  null, null, 's6',  // sem 6
+  null, null, 's7',  // sem 7
+  null, null, 's8',  // sem 8
+];
+
+function getCircuitVariant(week, dayIdx, circuitIdx, energyMode) {
+  const weekIdx = week - 1;
+  const semKey = 's' + week;
+  const circKey = semKey + '_c' + (circuitIdx + 1);
+  if (CIRCUIT_VARIANTS[circKey]) {
+    return CIRCUIT_VARIANTS[circKey][energyMode] || CIRCUIT_VARIANTS[circKey].high;
+  }
+  return null;
+}
+
+function adaptSession(session,timeMode,energyMode,_week,_dayIdx){
   const s=JSON.parse(JSON.stringify(session));
   const orig=JSON.parse(JSON.stringify(session));
   const isCircuito=session.dayType==='circuito';
@@ -641,12 +760,37 @@ function adaptSession(session,timeMode,energyMode){
   let badge='normal',note='';
   function adjRIR(rir,d){if(!rir)return rir;return rir.replace(/RIR (\d+)/,(_,n)=>'RIR '+(parseInt(n)+d));}
   if(isCircuito){
-    if(timeMode==='minimal'){s.blockC=orig.blockC.slice(0,1);badge='minimal';}
-    else if(timeMode==='reduced'){s.blockC=orig.blockC.slice(0,1);badge='reduced';}
-    if(!s.blockC||!s.blockC.length)s.blockC=orig.blockC.slice(0,1);
-    const tNotes={reduced:'Con el tiempo disponible, el Circuito A es la prioridad.',minimal:'Con poco tiempo, el primer circuito es suficiente para mantener el estímulo metabólico.'};
-    const eNotes={medium:'Energía algo baja: andá a ritmo sostenible, sin presionarte por marcas.',low:'Baja energía: completá el circuito a tu ritmo. Moverte hoy ya es un logro y mantiene el progreso.'};
+    // Aplicar variante de formato según energía
+    const applyVariants = (blockC, energy) => {
+      return blockC.map((circ, i) => {
+        const variant = getCircuitVariant(_week||1, _dayIdx||2, i, energy);
+        if (variant) return { ...circ, name: variant.name, reps: variant.reps, rest: variant.rest, notes: variant.notes };
+        return circ;
+      });
+    };
+
+    if(timeMode==='minimal'){
+      s.blockC = applyVariants(orig.blockC.slice(0,1), energyMode);
+      badge='minimal';
+    } else if(timeMode==='reduced'){
+      s.blockC = applyVariants(orig.blockC.slice(0,1), energyMode);
+      badge='reduced';
+    } else {
+      // Tiempo completo: ambos circuitos con variante de energía
+      s.blockC = applyVariants(orig.blockC, energyMode);
+    }
+
+    if(!s.blockC||!s.blockC.length) s.blockC = applyVariants(orig.blockC.slice(0,1), energyMode);
+
+    const formatLabel = {high:'AMRAP / For time', medium:'EMOM', low:'Circuito con pausa fija'};
+    const tNotes={reduced:'Con el tiempo disponible, el Circuito A es la prioridad.',minimal:'Con poco tiempo, el Circuito A es suficiente para mantener el estímulo metabólico.'};
+    const eNotes={
+      high:'',
+      medium:'Energía algo baja: formato EMOM — el minuto estructura tu esfuerzo automáticamente, sin necesidad de ir al límite.',
+      low:'Baja energía: formato con pausa fija — trabajás a ritmo controlado con descanso garantizado entre rondas. El objetivo es completarlo.'
+    };
     note=[tNotes[timeMode]||'',eNotes[energyMode]||''].filter(Boolean).join(' ');
+    if(energyMode!=='high') badge = badge==='normal' ? 'reduced' : badge;
     return{...s,ceoBadge:badge,ceoNote:note||null,ceoMod:note?{note}:null};
   }
   if(timeMode==='reduced'){s.blockC=[];s.blockD=null;badge='reduced';}
@@ -712,13 +856,11 @@ function renderSession(week, dayIdx, session, _tMode, _eMode) {
 
   if (!_tMode || !_eMode) {
     const sel = renderCEOSelector(week, dayIdx, session, (tMode, eMode) => {
-      const adapted = adaptSession(session, tMode, eMode);
-      // Forzar que ceoBadge y ceoNote lleguen como propiedades directas
+      const adapted = adaptSession(session, tMode, eMode, week, dayIdx);
       const sessionToRender = Object.assign({}, adapted, {
         ceoBadge: adapted.ceoBadge || 'normal',
         ceoNote: adapted.ceoNote || null,
       });
-      console.log('RENDER:', tMode, eMode, 'RIR:', sessionToRender.blockB&&sessionToRender.blockB[0]?sessionToRender.blockB[0].rir:'?', 'badge:', sessionToRender.ceoBadge, 'note:', sessionToRender.ceoNote?sessionToRender.ceoNote.slice(0,30):'null');
       const area = document.getElementById('session-area');
       if (area) { area.innerHTML = ''; area.appendChild(renderSession(week, dayIdx, sessionToRender, tMode, eMode)); }
     });
