@@ -1148,6 +1148,17 @@ const C1_NAME_MAP = {"w1_d0_B__log0": "Peso muerto rumano c/barra", "w1_d0_B__lo
 
 
 function findLastRecord(exName, currentWeek, currentDayIdx, currentPhase, currentIdx) {
+  const nameNormCheck = exName.toLowerCase().trim().replace(/^ss [ab]\d:\s*/i,'');
+  console.log('findLastRecord:', exName, '| norm:', nameNormCheck, '| logDataC1 keys:', Object.keys(state.logDataC1||{}).length, '| C1_NAME_MAP keys:', Object.keys(C1_NAME_MAP||{}).length);
+  // Muestra primeras 3 claves del mapa que matcheen parcialmente
+  if(C1_NAME_MAP) {
+    const matches = Object.entries(C1_NAME_MAP).filter(([k,v])=>v.toLowerCase().includes('hip')||v.toLowerCase().includes('thrust'));
+    console.log('C1_NAME_MAP hip entries:', matches.slice(0,4));
+  }
+  if(state.logDataC1) {
+    const c1keys = Object.keys(state.logDataC1).filter(k=>k.match(/^w\d+_d0_B__log1$/));
+    console.log('C1 logData B__log1 keys:', c1keys.slice(0,5));
+  }
   const currentLogKey = 'w' + currentWeek + '_d' + currentDayIdx + '_' + currentPhase + '__log' + currentIdx;
   const nameNorm = exName.toLowerCase().trim().replace(/^ss [ab]\d:\s*/i, '');
   const results = [];
