@@ -1,6 +1,6 @@
 {
-  "app": "plan-florencia-cristiano",
-  "exportedAt": "2026-09-08T16:14:00.788Z",
+  "app": "plan-florencia-ceo-c2",
+  "exportedAt": "2026-09-10T01:27:20.279Z",
   "planStart": "",
   "logData": {
     "w1_d0_B__log0": {
@@ -48,7 +48,7 @@
       "kneeSensation": null
     },
     "w1_d0_C__log0__name": {
-      "v": "Curl femoral sentado en máquina"
+      "v": "Curl femoral sentado en mÃ¡quina"
     },
     "w1_d0_C__log0": {
       "sets": [
@@ -65,7 +65,7 @@
           "reps": "15"
         }
       ],
-      "comment": "🚨Sumamos: Extensión cuádriceps en máquina 3x(12-15) con 22kg",
+      "comment": "ð¨Sumamos: ExtensiÃ³n cuÃ¡driceps en mÃ¡quina 3x(12-15) con 22kg",
       "kneeSensation": null
     },
     "w1_d0_C__log1": {
@@ -87,7 +87,7 @@
       "kneeSensation": null
     },
     "w1_d0_C__log2__name": {
-      "v": "Abducción de cadera en polea"
+      "v": "AbducciÃ³n de cadera en polea"
     },
     "w1_d0_C__log2": {
       "sets": [
@@ -304,10 +304,10 @@
       "kneeSensation": null
     },
     "w3_d0_C__log0__name": {
-      "v": "Curl femoral sentada en máquina"
+      "v": "Curl femoral sentada en mÃ¡quina"
     },
     "w3_d0_C__log2__name": {
-      "v": "Abducción de cadera en polea"
+      "v": "AbducciÃ³n de cadera en polea"
     },
     "w3_d0_B__log0": {
       "sets": [
@@ -524,7 +524,7 @@
       "kneeSensation": null
     },
     "w4_d2_C_circ__comment": {
-      "comment": "🚨CAMBIADO POR EMOM 15'\n\n40\" Thruster\n40\" Step box\n40\" Box dips\n40\" Skierg\n40\" Cuerda "
+      "comment": "ð¨CAMBIADO POR EMOM 15'\n\n40\" Thruster\n40\" Step box\n40\" Box dips\n40\" Skierg\n40\" Cuerda "
     },
     "w4_d0_B__log0": {
       "sets": [
@@ -545,7 +545,7 @@
           "reps": "10"
         }
       ],
-      "comment": "Más barra 15",
+      "comment": "MÃ¡s barra 15",
       "kneeSensation": null
     },
     "w4_d0_B__log1": {
@@ -567,7 +567,7 @@
           "reps": "12"
         }
       ],
-      "comment": "Más la barra de 15",
+      "comment": "MÃ¡s la barra de 15",
       "kneeSensation": null
     },
     "w4_d0_C__log0": {
