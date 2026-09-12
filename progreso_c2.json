@@ -1,8 +1,31 @@
 {
   "app": "plan-florencia-ceo-c2",
-  "exportedAt": "2026-09-12T23:41:45.682Z",
+  "exportedAt": "2026-09-12T23:42:20.123Z",
   "planStart": "",
-  "logData": {},
+  "logData": {
+    "w1_d0_B__log0": {
+      "sets": [
+        {
+          "kg": "54",
+          "reps": "4"
+        },
+        {
+          "kg": "",
+          "reps": ""
+        },
+        {
+          "kg": "",
+          "reps": ""
+        },
+        {
+          "kg": "",
+          "reps": ""
+        }
+      ],
+      "comment": "",
+      "kneeSensation": null
+    }
+  },
   "videos": {
     "Abducción de cadera en máquina": "",
     "Aperturas en máquina pec deck": "",
