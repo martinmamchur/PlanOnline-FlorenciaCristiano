@@ -1193,10 +1193,35 @@ function findLastRecord(exName, currentWeek, currentDayIdx, currentPhase, curren
     } catch(e) {}
   }
 
+  // Buscar en historial Ciclo 1 usando mapa de posiciones
+  if (state.logDataC1 && C1_NAME_MAP) {
+    for (const key of Object.keys(state.logDataC1)) {
+      if (!key.match(/^w\d+_d\d+_[BCD]__log\d+$/)) continue;
+      const entry = state.logDataC1[key];
+      if (!entry || !entry.sets || !entry.sets.some(s => s.kg || s.reps)) continue;
+      const mappedName = C1_NAME_MAP[key] || '';
+      const savedName = (state.logDataC1[key+'__name'] && state.logDataC1[key+'__name'].v) || '';
+      const candidateName = (mappedName || savedName).toLowerCase().trim()
+        .replace(/^ss [ab]\d:\s*/i, '').replace(/\s*\([^)]*\)\s*/g, '').trim();
+      if (candidateName && candidateName === nameNorm) {
+        const m = key.match(/^w(\d+)_d(\d+)/);
+        if (m) results.push({ week: parseInt(m[1]), day: parseInt(m[2]), key, entry, fromC1: true });
+      }
+    }
+  }
+
   if (!results.length) return null;
-  // Devolver el más reciente (mayor semana, luego mayor día)
-  results.sort((a, b) => a.week !== b.week ? a.week - b.week : a.day - b.day);
-  return results[results.length - 1];
+  // C2 tiene prioridad sobre C1 — devolver el más reciente
+  const c2r = results.filter(r => !r.fromC1);
+  const c1r = results.filter(r => r.fromC1);
+  if (c2r.length) {
+    c2r.sort((a, b) => a.week !== b.week ? a.week - b.week : a.day - b.day);
+    return c2r[c2r.length - 1];
+  }
+  c1r.sort((a, b) => a.week !== b.week ? a.week - b.week : a.day - b.day);
+  const best = c1r[c1r.length - 1];
+  if (best) best.fromC1label = '(Ciclo 1)';
+  return best || null;
 }
 
 
