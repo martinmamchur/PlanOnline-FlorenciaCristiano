@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>Método CEO — Florencia · Ciclo 2</title>
 <style>
 
@@ -14,7 +14,6 @@
   --bg:#0a0a0a; --surface:#161616; --surface2:#1d1d1d; --surface3:#232323;
   --border:#2b2b2b; --accent:#82b7d9; --accent-dim:#0f1e2d;
   --lime:#82b7d9; --text:#f2f0ec; --dim:#9a9a96; --faint:#5e5e5b;
-  --knee:#fb923c;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100%;}
@@ -67,6 +66,17 @@ input::placeholder,textarea::placeholder{color:var(--faint);}
 .day-dot{width:6px;height:6px;border-radius:50%;background:var(--faint);flex-shrink:0;}
 .day-btn.active .day-dot{background:#fff;}
 
+.ciclo-wrap{margin-bottom:14px;border:1px solid rgba(130,183,217,.15);border-radius:10px;overflow:hidden;}
+.ciclo-header{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;cursor:pointer;background:rgba(130,183,217,.05);}
+.ciclo-title{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#c49fd8;}
+.ciclo-toggle{font-size:11px;color:var(--dim);}
+.ciclo-body{display:none;padding:14px 16px;border-top:1px solid rgba(130,183,217,.1);}
+.ciclo-intro{font-size:13px;color:var(--dim);line-height:1.7;margin-bottom:14px;font-style:italic;}
+.ciclo-item{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(43,43,43,.6);}
+.ciclo-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.ciclo-item-title{font-size:13px;font-weight:700;color:#c49fd8;margin-bottom:5px;}
+.ciclo-item-text{font-size:13px;color:var(--text);line-height:1.75;}
+
 /* Session */
 #session-badge{display:flex;justify-content:flex-end;margin-bottom:10px;}
 .badge{display:inline-block;padding:4px 10px;border-radius:5px;font-family:'JetBrains Mono',monospace;
@@ -87,7 +97,6 @@ input::placeholder,textarea::placeholder{color:var(--faint);}
 
 /* Exercise card */
 .ex-card{background:var(--surface);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
-.ex-card.knee{border:1px solid rgba(251,146,60,.4);}
 .ex-card.normal{border:1px solid var(--border);}
 .ex-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
 .ex-name{font-weight:700;font-size:15.5px;color:var(--text);display:flex;align-items:center;gap:8px;}
@@ -97,8 +106,6 @@ input::placeholder,textarea::placeholder{color:var(--faint);}
   border:1px solid var(--border);color:var(--dim);}
 .pill-accent{border-color:var(--accent);color:var(--accent);background:var(--accent-dim);}
 .ex-rest{font-size:12.5px;color:var(--dim);}
-.ex-note-knee{font-size:12.5px;color:var(--knee);margin-top:8px;padding:9px 11px;
-  background:rgba(251,146,60,.06);border-radius:7px;border-left:3px solid var(--knee);line-height:1.6;}
 .ex-note{font-size:12.5px;color:var(--text);margin-top:8px;padding:9px 11px;
   background:var(--surface2);border-radius:7px;border-left:3px solid var(--lime);}
 
@@ -110,16 +117,6 @@ input::placeholder,textarea::placeholder{color:var(--faint);}
   text-decoration:none;border:1px solid var(--accent);border-radius:6px;padding:6px 9px;
   letter-spacing:.03em;white-space:nowrap;}
 .video-saved{font-size:11px;color:var(--lime);}
-
-/* Knee scale */
-.knee-box{margin-top:10px;padding:10px 12px;background:rgba(251,146,60,.08);
-  border:1px solid rgba(251,146,60,.35);border-radius:8px;}
-.knee-title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;
-  color:var(--knee);font-weight:700;margin-bottom:8px;text-transform:uppercase;}
-.knee-btns{display:flex;gap:6px;flex-wrap:wrap;}
-.knee-btn{padding:5px 9px;border-radius:6px;font-size:11.5px;font-weight:700;
-  border:1px solid var(--border);background:var(--surface2);color:var(--faint);cursor:pointer;transition:all .12s;}
-.knee-warning{font-size:12px;color:var(--knee);margin-top:8px;line-height:1.5;}
 
 /* Log table */
 .log-section{margin-top:14px;}
@@ -154,30 +151,6 @@ input::placeholder,textarea::placeholder{color:var(--faint);}
 .stat-label{font-size:12px;color:var(--dim);margin-top:4px;}
 .block-bar{height:6px;border-radius:3px;background:var(--surface3);overflow:hidden;margin-top:8px;}
 .block-bar-fill{height:100%;background:var(--accent);border-radius:3px;}
-
-/* Guide */
-.guide-hero{background:var(--lime);color:#0a0a0a;border-radius:12px;padding:20px 18px;margin-bottom:18px;}
-.guide-hero h2{font-size:19px;font-weight:800;margin-bottom:6px;font-family:system-ui,sans-serif;}
-.guide-hero p{font-size:13.5px;line-height:1.6;opacity:.85;}
-.accordion{margin-bottom:10px;border:1px solid var(--border);border-radius:10px;background:var(--surface);overflow:hidden;}
-.acc-header{width:100%;text-align:left;padding:14px 16px;background:transparent;border:none;
-  display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:700;
-  color:var(--text);cursor:pointer;}
-.acc-toggle{color:var(--accent);font-size:18px;font-family:'JetBrains Mono',monospace;}
-.acc-body{padding:0 16px 16px;font-size:13.5px;line-height:1.7;color:var(--dim);display:none;}
-.acc-body.open{display:block;}
-.acc-body table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px;}
-.acc-body th{padding:8px;text-align:left;border:1px solid var(--border);background:var(--surface2);font-weight:600;color:var(--text);}
-.acc-body td{padding:8px;border:1px solid var(--border);}
-.acc-body ul,.acc-body ol{padding-left:18px;margin-top:4px;}
-.acc-body li{margin-bottom:4px;}
-.acc-body strong{color:var(--text);}
-.acc-body code{background:var(--surface2);padding:2px 6px;border-radius:4px;font-size:12px;}
-.config-box{margin-bottom:18px;padding:14px 16px;background:var(--surface);
-  border:1px solid var(--border);border-radius:10px;}
-.config-label{font-size:12.5px;color:var(--dim);margin-bottom:6px;display:block;}
-.config-input{padding:8px 10px;font-size:13.5px;border:1px solid var(--border);
-  border-radius:6px;background:var(--surface2);color:var(--text);}
 
 /* Header btn styles */
 .hbtn{font-family:'JetBrains Mono',monospace;font-size:11px;padding:8px 12px;border-radius:6px;
@@ -257,10 +230,13 @@ h1, h2, h3, .plan-name, #session-title { font-family:'Outfit',sans-serif; letter
       <button class="hbtn" onclick="reloadProgress()" style="border-color:var(--dim);color:var(--dim);font-size:11px;">🔄 Cargar mis datos</button>
 
       <div id="sync-msg" style="font-size:12px;margin-top:4px;"></div>
-      <div id="token-ui" style="display:none;margin-top:8px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;"><div style="font-size:11px;color:var(--dim);margin-bottom:6px;letter-spacing:.08em;text-transform:uppercase;">Token de GitHub para sincronizar</div><div style="display:flex;gap:8px;"><input id="token-input" type="password" placeholder="ghp_..." style="flex:1;padding:8px;border-radius:6px;border:1px solid var(--border);background:#1a1a1a;color:#fff;font-size:13px;"/><button onclick="saveTokenAndClose()" style="padding:8px 14px;border-radius:6px;border:1px solid var(--lime);background:transparent;color:var(--lime);font-size:13px;cursor:pointer;">Guardar</button><button onclick="showTokenUI()" style="padding:8px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--dim);font-size:13px;cursor:pointer;">Cancelar</button></div><div style="font-size:11px;color:var(--dim);margin-top:6px;">El token se guarda solo en este navegador.</div></div>
     </div>
   </div>
   <div id="readonly-banner" style="display:none;margin-top:10px;padding:9px 12px;border-radius:7px;font-size:12.5px;background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);">Modo lectura activado — no se puede editar nada en este dispositivo, y no se sube nada a la nube por accidente.</div>
+  <div id="date-range-wrap" class="mono" style="margin-top:8px;font-size:12px;color:var(--faint);">
+    RANGO: <span id="date-range" onclick="startEditDate()" style="cursor:pointer;color:var(--accent);border-bottom:1px dashed var(--accent);">—</span>
+    <input id="date-input" type="date" style="display:none;font-size:12px;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:3px 6px;" onchange="commitDate()"/>
+  </div>
   <div id="progress-bar-wrap">
     <div id="progress-label">
       <div class="mono" style="font-size:11px;color:var(--faint);letter-spacing:.1em;">PROGRESO DEL PLAN</div>
@@ -294,44 +270,25 @@ function storageSet(key, val) {
 }
 
 /* ============================================================
-   GITHUB VIDEOS — lee videos.json del repositorio y lo actualiza
-   El token se incrusta en el HTML — solo el coach tiene este archivo
+   GITHUB VIDEOS — lee y guarda videos.json vía el Worker seguro
+   (mismo mecanismo que el progreso — sin token embebido en el HTML)
    ============================================================ */
-const GH_USER  = 'martinmamchur';
-const GH_REPO  = 'PlanOnline-FlorenciaCristiano';
-const GH_FILE  = 'videos.json';
-const GH_TOKEN = 'PEGAR_TOKEN_AQUI'; // <-- pegá tu token acá antes de subir a GitHub
-
 async function ghGetVideos() {
   try {
-    // Intentar leer videos.json del repositorio público (no requiere token)
-    const url = `https://raw.githubusercontent.com/${GH_USER}/${GH_REPO}/main/${GH_FILE}?t=${Date.now()}`;
-    const res = await fetch(url);
+    const res = await fetch(WORKER_URL+'?repo='+WORKER_REPO+'&file=videos.json&t='+Date.now());
     if (!res.ok) return null;
     return await res.json();
   } catch(e) { return null; }
 }
 
 async function ghSaveVideos(videos) {
-  if (!GH_TOKEN || GH_TOKEN === 'PEGAR_TOKEN_AQUI') return false;
   try {
-    const apiUrl = `https://api.github.com/repos/${GH_USER}/${GH_REPO}/contents/${GH_FILE}`;
-    // Primero obtener el SHA actual del archivo (necesario para actualizarlo)
-    const headers = {
-      'Authorization': `token ${GH_TOKEN}`,
-      'Accept': 'application/vnd.github.v3+json',
-      'Content-Type': 'application/json',
-    };
-    let sha = null;
-    try {
-      const getRes = await fetch(apiUrl, { headers });
-      if (getRes.ok) { const data = await getRes.json(); sha = data.sha; }
-    } catch(e) {}
-
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(videos, null, 2))));
-    const body = { message: 'Actualizar videos', content, ...(sha ? { sha } : {}) };
-    const putRes = await fetch(apiUrl, { method: 'PUT', headers, body: JSON.stringify(body) });
-    return putRes.ok;
+    const res = await fetch(WORKER_URL+'?repo='+WORKER_REPO+'&file=videos.json', {
+      method: 'PUT',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(videos)
+    });
+    return res.ok;
   } catch(e) { return false; }
 }
 
@@ -821,6 +778,23 @@ function adaptSession(session,timeMode,energyMode,_week,_dayIdx){
   return{...s,ceoBadge:badge,ceoNote:note||null,ceoMod:note?{note}:null};
 }
 
+function renderCicloHormonal() {
+  const wrap = document.createElement('div');
+  wrap.className = 'ciclo-wrap';
+  const header = document.createElement('div');
+  header.className = 'ciclo-header';
+  header.innerHTML = '<span class="ciclo-title">💜 Tu ciclo también entrena con vos</span><span class="ciclo-toggle" id="ciclo-toggle">▼ ver</span>';
+  const body = document.createElement('div');
+  body.className = 'ciclo-body';
+  body.innerHTML = `<p class="ciclo-intro">Cada semana del mes tu cuerpo es diferente. Acá va una guía rápida para que sepas cómo ajustar el entrenamiento según cómo te sentís:</p>
+    <div class="ciclo-item"><div class="ciclo-item-title">Si estás en tus primeros días del mes</div><div class="ciclo-item-text">Si hay molestias o simplemente te sentís pesada: bajá el peso con el que normalmente entrenás, hacé las series que puedas sin culpa y priorizá moverte sobre rendirte. Si solo completás 2 series en vez de 4, está perfecto. No es retroceso, es escucharte.</div></div>
+    <div class="ciclo-item"><div class="ciclo-item-title">Si ya pasaron los primeros días y empezás a sentirte mejor</div><div class="ciclo-item-text">Tu energía vuelve naturalmente. Es un buen momento para retomar el ritmo normal, intentar subir un poco el peso que venías usando y ver cómo responde el cuerpo. No tenés que forzar, pero si te sentís bien, aprovechalo.</div></div>
+    <div class="ciclo-item"><div class="ciclo-item-title">Si estás en la mitad del mes y te sentís con mucha energía</div><div class="ciclo-item-text">Suele ser el momento del mes donde más fuerza tenés. Si elegiste "mucha energía" hoy, es una buena semana para intentar superar una marca personal o hacer las series más completas. Solo tené cuidado con los saltos o movimientos muy bruscos si tocan en tu plani — tu cuerpo en esta etapa es más propenso a pequeños tirones.</div></div>
+    <div class="ciclo-item"><div class="ciclo-item-title">Si estás en la semana previa a tus primeros días</div><div class="ciclo-item-text">Es muy común sentirse más cansada, irritable o inflamada. Si elegiste "baja energía" o "energía media" hoy, tu cuerpo te está hablando y está bien hacerle caso. Hacé lo que puedas, sin compararte con cómo estabas la semana pasada. Completar la sesión así como te sentís ya es un logro enorme.</div></div>`;
+  let open = false;
+  header.onclick = function() { open=!open; body.style.display=open?'block':'none'; const ct=document.getElementById('ciclo-toggle');if(ct)ct.textContent=open?'▲ ocultar':'▼ ver'; };
+  wrap.appendChild(header); wrap.appendChild(body); return wrap;
+}
 function renderCEOModNote(session){
   const frag=document.createDocumentFragment();
   if(!session.ceoNote&&session.ceoBadge==='normal')return frag;
@@ -897,6 +871,8 @@ function renderSession(week, dayIdx, session, _tMode, _eMode) {
     ));
   }
 
+  frag.appendChild(renderCicloHormonal());
+
   const isUpper = session.dayType === 'upper';
   const isCardio = session.dayType === 'cardio';
   const doneKey = `w${week}_d${dayIdx}__done`;
@@ -933,7 +909,7 @@ function renderSession(week, dayIdx, session, _tMode, _eMode) {
 
   // Coach note
   const noteText = isCardio ? 'Respetá el ritmo indicado de RPE.' : isUpper
-    ? `Semana ${week}/12 · ${getMeso(week).subtitle}. Registrá tus cargas — estas sesiones también forman parte de tu historial.`
+    ? `Semana ${week}/8 · ${getMeso(week).subtitle}. Registrá tus cargas — estas sesiones también forman parte de tu historial.`
     : `Semana ${week}/8 · ${getMeso(week).subtitle}. Registrá tus cargas y la técnica en cada ejercicio.`;
   frag.appendChild(h('div', {className:'coach-note'},
     h('strong', null, 'Nota del coach: '), noteText
@@ -973,13 +949,22 @@ function renderSession(week, dayIdx, session, _tMode, _eMode) {
       chk.addEventListener('change',function(){if(isReadOnlyMode())return;state.logData[doneKey]={done:chk.checked};save();lbl.style.color=chk.checked?'var(--ceo-blue)':'var(--dim)';});
       if(chk.checked)lbl.style.color='var(--ceo-blue)';
       top.appendChild(lbl);top.appendChild(chk);cell.appendChild(top);
+      var vidRow=document.createElement('div');
+      vidRow.style.cssText='position:relative;width:100%;';
       var vidInp=document.createElement('input');
       vidInp.type='url';vidInp.placeholder='Link video...';
       vidInp.value=(state.videos&&state.videos[vidKey])||'';
-      vidInp.style.cssText='width:100%;font-size:11px;padding:4px 6px;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--dim);outline:none;';
+      vidInp.style.cssText='width:100%;font-size:11px;padding:4px 26px 4px 6px;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--dim);outline:none;box-sizing:border-box;';
       vidInp.readOnly=isReadOnlyMode();
-      vidInp.addEventListener('change',function(){if(isReadOnlyMode())return;if(!state.videos)state.videos={};state.videos[vidKey]=vidInp.value.trim();saveVideo(vidKey,vidInp.value.trim());});
-      cell.appendChild(vidInp);
+      var wuPlayBtn=document.createElement('button');
+      wuPlayBtn.type='button';wuPlayBtn.textContent='▶';wuPlayBtn.title='Ver video';
+      wuPlayBtn.style.cssText='position:absolute;top:50%;right:3px;transform:translateY(-50%);background:none;border:none;color:var(--lime);font-size:12px;line-height:1;cursor:pointer;padding:2px 4px;display:none;';
+      function updateWuPlayBtn(){wuPlayBtn.style.display=vidInp.value.trim()?'block':'none';}
+      wuPlayBtn.addEventListener('click',function(){if(vidInp.value.trim())openVideoModal(vidInp.value.trim());});
+      vidInp.addEventListener('change',function(){if(isReadOnlyMode())return;if(!state.videos)state.videos={};state.videos[vidKey]=vidInp.value.trim();saveVideo(vidKey,vidInp.value.trim());updateWuPlayBtn();});
+      updateWuPlayBtn();
+      vidRow.appendChild(vidInp);vidRow.appendChild(wuPlayBtn);
+      cell.appendChild(vidRow);
       grid.appendChild(cell);
     });
     ecBody.appendChild(grid);ecWrap.appendChild(ecHdr);ecWrap.appendChild(ecBody);frag.appendChild(ecWrap);
@@ -1234,7 +1219,7 @@ function renderExCard(week, dayIdx, phase, idx, exObj) {
   const numSets = typeof exObj.sets === 'number' ? exObj.sets : 1;
   const setsArr = entry.sets.length === numSets ? entry.sets : Array.from({length:numSets},(_,i)=>entry.sets[i]||{kg:'',reps:''});
 
-  const card = h('div', {className:'ex-card ' + (exObj.kneeAlert ? 'knee' : 'normal')});
+  const card = h('div', {className:'ex-card normal'});
   card.style.cssText = 'padding:0;overflow:hidden;';
   const cardHeader = document.createElement('div');
   cardHeader.style.cssText = 'padding:12px 14px 10px 14px;cursor:pointer;';
@@ -1273,12 +1258,6 @@ function renderExCard(week, dayIdx, phase, idx, exObj) {
   card.appendChild(cardHeader);
   cardBody.appendChild(h('div', {className:'ex-rest', style:'padding-top:8px;'}, 'Descanso: ' + exObj.rest));
 
-  // Knee note
-  if (exObj.kneeAlert) {
-    cardBody.appendChild(h('div', {className:'ex-note-knee'},
-      h('strong', null, 'Rodilla: '), getKneeNote(exObj.name)
-    ));
-  }
   // General note
   if (exObj.notes) {
     cardBody.appendChild(h('div', {className:'ex-note'}, exObj.notes));
@@ -1332,43 +1311,6 @@ function renderExCard(week, dayIdx, phase, idx, exObj) {
   vidInputRow.appendChild(playBtn);
   vidWrap.appendChild(vidInputRow);
   cardBody.appendChild(vidWrap);
-
-  // Knee scale (only if kneeAlert)
-  if (exObj.kneeAlert) {
-    const kbox = h('div', {className:'knee-box'});
-    kbox.appendChild(h('div', {className:'knee-title'}, '🦴 Sensación de rodilla hoy'));
-    const kbtns = h('div', {className:'knee-btns'});
-    KNEE_SCALE.forEach(k => {
-      const btn = h('button', {className:'knee-btn'}, `${k.val} — ${k.label}`);
-      const current = entry.kneeSensation;
-      if (current === k.val) {
-        btn.style.border = `2px solid ${k.color}`;
-        btn.style.background = k.color + '22';
-        btn.style.color = k.color;
-      }
-      btn.disabled = isReadOnlyMode();
-      btn.addEventListener('click', () => {
-        if (isReadOnlyMode()) return;
-        const e2 = state.logData[logKey] || {sets:setsArr, comment:'', kneeSensation:null};
-        e2.kneeSensation = k.val;
-        state.logData[logKey] = e2;
-        save();
-        // Re-render just this card
-        const newCard = renderExCard(week, dayIdx, phase, idx, exObj);
-        card.replaceWith(newCard);
-      });
-      kbtns.appendChild(btn);
-    });
-    kbox.appendChild(kbtns);
-    const cur = entry.kneeSensation;
-    if (cur !== null && cur !== undefined && cur >= 3) {
-      const msg = cur >= 5 ? 'Detené el ejercicio y anotá en comentarios. Avisale a tu entrenador.'
-        : cur === 4 ? 'Reducí la carga al 70% o pasá a la regresión. Avisale hoy.'
-        : 'Reducí el rango de movimiento y la carga. Controlá al final de la sesión.';
-      kbox.appendChild(h('div', {className:'knee-warning'}, '⚠️ ' + msg));
-    }
-    card.appendChild(kbox);
-  }
 
   // Log table
   const logSection = h('div', {className:'log-section'});
@@ -1526,120 +1468,6 @@ function renderStats() {
 }
 
 /* ============================================================
-   RENDER: GUIDE TAB
-   ============================================================ */
-const GUIDE_SECTIONS = [
-  { id:'config', title:'⚙️ Configuración del plan', content: () => {
-    const box = h('div', null);
-    box.appendChild(h('label', {className:'config-label'}, 'Fecha de inicio del plan (para calcular el rango de 8 semanas)'));
-    const dateInput = h('input', {type:'date', className:'config-input', value: state.planStart||''});
-    dateInput.addEventListener('change', () => {
-      state.planStart = dateInput.value;
-      save(); renderHeader();
-    });
-    box.appendChild(dateInput);
-    return box;
-  }},
-  { id:'macros', title:'🍽️ Cómo gestionar tus macronutrientes', content: () => {
-    const d = h('div', null);
-    d.innerHTML = `<p>Tu objetivo es <strong>ganar masa muscular en tren inferior</strong>. El enfoque es un <strong>superávit calórico leve</strong> con <strong>proteína alta</strong> — suficiente combustible para construir sin ganar grasa innecesaria.</p>
-    <table><thead><tr><th>Macronutriente</th><th>Rango orientativo</th><th>Por qué</th></tr></thead>
-    <tbody>
-    <tr><td><strong>Proteína</strong></td><td>1.8 - 2.2 g por kg / día</td><td>Material de construcción del músculo — prioridad absoluta.</td></tr>
-    <tr><td><strong>Carbohidratos</strong></td><td>3 - 4 g por kg en días de entreno</td><td>Combustible directo para tus sesiones de fuerza.</td></tr>
-    <tr><td><strong>Grasas</strong></td><td>0.8 - 1 g por kg / día</td><td>Soporte hormonal y articular — especialmente importante para la rodilla.</td></tr>
-    </tbody></table>
-    <p style="margin-top:10px"><strong>En la práctica:</strong> en cada comida, llenás 1/3 del plato con proteína (tamaño de tu palma), añadís carbohidratos según el día (más en días de pierna), y completás con vegetales y una grasa saludable.</p>`;
-    return d;
-  }},
-  { id:'platos', title:'🥗 Ideas de platos por comida', content: () => {
-    const d = h('div', null);
-    d.innerHTML = `<p><strong>Desayunos:</strong></p><ul><li>Huevos revueltos (2-3) + avena con fruta + frutos secos</li><li>Yogur griego natural + granola + frutos rojos + chía</li><li>Tostadas integrales + palta + huevo pochado + tomate</li></ul>
-    <p><strong>Almuerzos / cenas:</strong></p><ul><li>Pollo a la plancha + arroz integral o quinoa + ensalada</li><li>Salmón al horno + batata asada + brócoli al vapor</li><li>Carne magra salteada + vegetales + arroz</li><li>Lentejas o garbanzos guisados + verduras</li></ul>
-    <p><strong>Colaciones:</strong></p><ul><li>Fruta + un puñado de almendras</li><li>Yogur proteico + canela</li><li>Batido de proteína + plátano (ideal post-entrenamiento)</li></ul>`;
-    return d;
-  }},
-  { id:'timing', title:'⏱️ Timing de comidas y entrenamiento', content: () => {
-    const d = h('div', null);
-    d.innerHTML = `<ul><li><strong>Antes de entrenar (1-2h):</strong> carbohidratos de fácil digestión + algo de proteína (ej. tostada con huevo, o fruta con yogur).</li>
-    <li><strong>Después de entrenar (dentro de 1-2h):</strong> priorizá proteína de calidad — es cuando el cuerpo mejor reconstruye el músculo trabajado.</li>
-    <li><strong>Hidratación:</strong> 2-2.5 litros de agua al día como base. La sed ya es una señal tardía — no esperes a sentirla.</li></ul>`;
-    return d;
-  }},
-  { id:'carbcycling', title:'🔄 Distribución de carbohidratos según tu semana', content: () => {
-    const d = h('div', null);
-    d.innerHTML = `<p>Entre tus 3 días de pierna y tus clases de functional, tu semana tiene varios días de carga física real. No todos necesitan la misma cantidad de carbohidratos:</p>
-    <ul><li><strong>Días de pierna pesada (Día 1 y Día 3):</strong> tu carbohidrato más alto del día — el cuerpo lo usa mejor alrededor de las sesiones más demandantes.</li>
-    <li><strong>Días de tren superior (Martes/Jueves):</strong> carbohidratos en rango medio.</li>
-    <li><strong>Días sin entrenamiento:</strong> carbohidratos algo más bajos, manteniendo siempre la proteína alta.</li></ul>
-    <p style="margin-top:8px">No necesitás calcular esto al gramo — la idea es sentir más combustible disponible en los días más duros.</p>`;
-    return d;
-  }},
-  { id:'rodilla', title:'🦴 Tu rodilla — cómo entrenar inteligente con ella', content: () => {
-    const d = h('div', null);
-    d.innerHTML = `<p>Tu diagnóstico de rótula ascendente hace que ciertos ejercicios carguen la articulación de forma diferente. Con la dosis correcta de carga, rango y seguimiento, se puede entrenar con total eficacia.</p>
-    <p><strong>Los ejercicios marcados con 🦴</strong> tienen una escala de sensación del 0 al 5. Usála en cada sesión:</p>
-    <ul><li><strong>0-2 (verde):</strong> todo bien, entrenás normal.</li>
-    <li><strong>3 (amarillo):</strong> reducís el rango o la carga un 20%, completás y avisás.</li>
-    <li><strong>4 (naranja):</strong> bajás la carga al 70% o pasás a la regresión. Avisás ese día.</li>
-    <li><strong>5 (rojo):</strong> parás, anotás y avisás. Sin heroísmo.</li></ul>
-    <p style="margin-top:8px">Los omega-3 (salmón, nueces, chía) y la vitamina C (frutas y vegetales frescos) tienen evidencia de soporte en la salud articular. No son mágicos, pero suman.</p>`;
-    return d;
-  }},
-  { id:'mitos', title:'🚫 Mitos que dejamos atrás', content: () => {
-    const d = h('div', null);
-    d.innerHTML = `<ul><li><strong>"Sudar mucho = quemar más grasa":</strong> el sudor es termorregulación, no indica gasto calórico.</li>
-    <li><strong>"Las grasas engordan":</strong> lo que determina el peso es el balance calórico total, no un macronutriente aislado.</li>
-    <li><strong>"Comer de noche engorda":</strong> lo relevante es el total del día, no la hora del reloj.</li>
-    <li><strong>"Hay que eliminar grupos de alimentos":</strong> la sostenibilidad a largo plazo le gana siempre a la restricción extrema.</li></ul>`;
-    return d;
-  }},
-  { id:'mentalidad', title:'💛 Una nota para los días difíciles', content: () => {
-    const d = h('div', null);
-    d.innerHTML = `<p>Vas a tener semanas donde la rodilla moleste más, días sin ganas de entrenar, o comidas fuera del plan. Eso es parte normal del proceso.</p>
-    <p>Lo que construye el resultado de estos 3 meses no es ningún día perfecto aislado — es el promedio de tus decisiones a lo largo de las 8 semanas. Confiá en el proceso.</p>`;
-    return d;
-  }},
-  { id:'comousar', title:'📋 Cómo usar esta herramienta', content: () => {
-    const d = h('div', null);
-    d.innerHTML = `<ul><li>En la pestaña <strong>"Plan"</strong>, elegí el bloque de semana (S1 a S12) en curso.</li>
-    <li>Dentro de cada semana, navegá entre los días.</li>
-    <li>Registrá kg y repeticiones en cada serie — se guarda automáticamente en este dispositivo.</li>
-    <li>Pegá el link de video de cada ejercicio si tu entrenador te lo comparte.</li></ul>`,
-    d.innerHTML += `<div style="margin-top:12px;padding:12px;background:var(--surface2);border-radius:8px;border-left:3px solid var(--lime)">
-    <strong style="color:var(--text)">Cómo ve tu entrenador tu progreso:</strong> no hace falta que mandes nada — todo se guarda solo en la nube a medida que vas cargando pesos, reps y comentarios. Tu entrenador lo ve directo desde su celular tocando <strong>"🔄 ACTUALIZAR"</strong>.</div>`;
-    return d;
-  }},
-];
-
-function renderGuide() {
-  const c = document.getElementById('content');
-  c.innerHTML = '';
-
-  const hero = h('div', {className:'guide-hero'});
-  hero.appendChild(h('h2', null, 'Tu alimentación es el otro 70% del resultado'));
-  hero.appendChild(h('p', null, 'No existe rutina de entrenamiento, sin importar lo perfecta que sea, que compense una alimentación que no sostiene tu energía y tu recuperación. Esta guía no es una dieta rígida: es un mapa para que tomes mejores decisiones la mayoría de las veces.'));
-  c.appendChild(hero);
-
-  GUIDE_SECTIONS.forEach(sec => {
-    const acc = h('div', {className:'accordion'});
-    const header = h('button', {className:'acc-header'});
-    header.appendChild(document.createTextNode(sec.title));
-    const toggle = h('span', {className:'acc-toggle'}, '+');
-    header.appendChild(toggle);
-    const body = h('div', {className:'acc-body'});
-    body.appendChild(sec.content());
-    header.addEventListener('click', () => {
-      const open = body.classList.toggle('open');
-      toggle.textContent = open ? '−' : '+';
-    });
-    acc.appendChild(header);
-    acc.appendChild(body);
-    c.appendChild(acc);
-  });
-}
-
-/* ============================================================
    TAB SWITCHING
    ============================================================ */
 const RECIPES=[
@@ -1685,7 +1513,6 @@ function switchTab(tab) {
   if (tab === 'plan') renderPlan();
   else if (tab === 'stats') renderStats();
   else if(tab==='recetas') renderRecipes();
-  else renderGuide();
 }
 
 /* ============================================================
@@ -1704,6 +1531,25 @@ function commitName() {
   const input = document.getElementById('student-name-input');
   const display = document.getElementById('student-name-display');
   state.studentName = input.value;
+  save();
+  input.style.display = 'none';
+  display.style.display = 'inline';
+  renderHeader();
+}
+
+function startEditDate() {
+  if (isReadOnlyMode()) return;
+  const display = document.getElementById('date-range');
+  const input = document.getElementById('date-input');
+  input.value = state.planStart || '';
+  display.style.display = 'none';
+  input.style.display = 'inline-block';
+  input.focus();
+}
+function commitDate() {
+  const input = document.getElementById('date-input');
+  const display = document.getElementById('date-range');
+  state.planStart = input.value;
   save();
   input.style.display = 'none';
   display.style.display = 'inline';
