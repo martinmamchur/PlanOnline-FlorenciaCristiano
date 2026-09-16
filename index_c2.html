@@ -994,7 +994,7 @@ function renderSession(week, dayIdx, session, _tMode, _eMode) {
     // Fase C — Circuito (bloque visual especial)
     if (session.blockC && session.blockC.length) {
       frag.appendChild(h('div', {className:'phase-label'}, 'Circuito metabólico'));
-      session.blockC.forEach((circ) => {
+      session.blockC.forEach((circ, circIdx) => {
         const circCard = document.createElement('div');
         circCard.className = 'ex-card normal';
         circCard.style.cssText = 'border-left: 3px solid var(--lime); padding: 16px;';
@@ -1022,7 +1022,7 @@ function renderSession(week, dayIdx, session, _tMode, _eMode) {
         }
 
         // Campo de comentario para registro
-        const commentKey = `w${week}_d${dayIdx}_C_circ__comment`;
+        const commentKey = `w${week}_d${dayIdx}_C_circ${circIdx}__comment`;
         const comment = document.createElement('textarea');
         comment.className = 'log-comment';
         comment.placeholder = 'Anotá tu tiempo, rondas completadas o sensaciones...';
