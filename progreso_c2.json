@@ -1,6 +1,6 @@
 {
   "app": "plan-florencia-ceo-c2",
-  "exportedAt": "2026-09-22T16:05:36.368Z",
+  "exportedAt": "2026-09-22T16:05:40.938Z",
   "planStart": "2026-09-15",
   "logData": {
     "w1_d0_B__log0": {
@@ -108,6 +108,7 @@
     "calentamiento__core3": ""
   },
   "sessionDone": {
-    "w1_d2__done": true
+    "w1_d2__done": true,
+    "w2_d2__done": true
   }
 }
