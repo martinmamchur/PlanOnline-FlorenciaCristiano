@@ -1,6 +1,6 @@
 {
   "app": "plan-florencia-ceo-c2",
-  "exportedAt": "2026-09-22T15:58:15.938Z",
+  "exportedAt": "2026-09-22T16:05:36.368Z",
   "planStart": "2026-09-15",
   "logData": {
     "w1_d0_B__log0": {
@@ -33,6 +33,9 @@
     },
     "w2_d2_C_circ0__comment": {
       "comment": "10'30''"
+    },
+    "w2_d2_C_circ1__comment": {
+      "comment": "4 rondas"
     }
   },
   "videos": {
