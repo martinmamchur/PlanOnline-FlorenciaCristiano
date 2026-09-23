@@ -1,6 +1,6 @@
 {
   "app": "plan-florencia-ceo-c2",
-  "exportedAt": "2026-09-23T20:34:25.539Z",
+  "exportedAt": "2026-09-23T20:35:02.444Z",
   "planStart": "2026-09-15",
   "logData": {
     "w1_d0_B__log0": {
@@ -78,7 +78,7 @@
           "reps": "10"
         }
       ],
-      "comment": "",
+      "comment": "Contando barra de 20kg",
       "kneeSensation": null
     }
   },
