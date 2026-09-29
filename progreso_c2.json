@@ -1,6 +1,6 @@
 {
   "app": "plan-florencia-ceo-c2",
-  "exportedAt": "2026-09-29T15:55:19.118Z",
+  "exportedAt": "2026-09-29T15:58:30.861Z",
   "planStart": "2026-09-15",
   "logData": {
     "w1_d0_B__log0": {
@@ -207,6 +207,7 @@
   },
   "sessionDone": {
     "w1_d2__done": true,
-    "w2_d2__done": true
+    "w2_d2__done": true,
+    "w3_d2__done": true
   }
 }
