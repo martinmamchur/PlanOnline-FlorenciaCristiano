@@ -1,6 +1,6 @@
 {
   "app": "plan-florencia-ceo-c2",
-  "exportedAt": "2026-10-02T21:35:53.126Z",
+  "exportedAt": "2026-10-02T21:36:35.879Z",
   "planStart": "2026-09-15",
   "logData": {
     "w1_d0_B__log0": {
@@ -174,6 +174,24 @@
         {
           "kg": "31,8",
           "reps": "8"
+        }
+      ],
+      "comment": "",
+      "kneeSensation": null
+    },
+    "w3_d1_C__log0": {
+      "sets": [
+        {
+          "kg": "12,5",
+          "reps": ""
+        },
+        {
+          "kg": "12,5",
+          "reps": ""
+        },
+        {
+          "kg": "",
+          "reps": ""
         }
       ],
       "comment": "",
