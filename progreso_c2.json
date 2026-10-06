@@ -1,6 +1,6 @@
 {
   "app": "plan-florencia-ceo-c2",
-  "exportedAt": "2026-10-06T15:52:37.024Z",
+  "exportedAt": "2026-10-06T15:53:13.270Z",
   "planStart": "2026-09-15",
   "logData": {
     "w1_d0_B__log0": {
@@ -252,7 +252,7 @@
       "kneeSensation": null
     },
     "w4_d2_C_circ1__comment": {
-      "comment": "Cambiamos SWING por THRUSTER"
+      "comment": "Cambiamos SWING por THRUSTER y SKI por trineo "
     }
   },
   "videos": {
