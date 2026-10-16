@@ -1,6 +1,6 @@
 {
   "app": "plan-florencia-ceo-c2",
-  "exportedAt": "2026-10-16T20:48:48.168Z",
+  "exportedAt": "2026-10-16T20:49:13.324Z",
   "planStart": "2026-09-15",
   "logData": {
     "w1_d0_B__log0": {
@@ -467,6 +467,24 @@
       ],
       "kneeSensation": null,
       "comment": "Lo hicimos con barra W - 10 reps con 5kg cada lado + fallo con 2,5kg cada lado "
+    },
+    "w5_d1_C__log2": {
+      "sets": [
+        {
+          "kg": "5",
+          "reps": ""
+        },
+        {
+          "kg": "5",
+          "reps": ""
+        },
+        {
+          "kg": "5",
+          "reps": ""
+        }
+      ],
+      "comment": "",
+      "kneeSensation": null
     }
   },
   "videos": {
