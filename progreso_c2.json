@@ -1,6 +1,6 @@
 {
   "app": "plan-florencia-ceo-c2",
-  "exportedAt": "2026-10-16T20:28:26.410Z",
+  "exportedAt": "2026-10-16T20:29:28.098Z",
   "planStart": "2026-09-15",
   "logData": {
     "w1_d0_B__log0": {
@@ -413,6 +413,24 @@
       ],
       "kneeSensation": null,
       "comment": "Remo en máquina de discos"
+    },
+    "w5_d1_C__log1": {
+      "sets": [
+        {
+          "kg": "31,8",
+          "reps": "10"
+        },
+        {
+          "kg": "31,8",
+          "reps": "10"
+        },
+        {
+          "kg": "31,8",
+          "reps": "10"
+        }
+      ],
+      "comment": "",
+      "kneeSensation": null
     }
   },
   "videos": {
